@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - demo_indices:/app/data/indices
+      - demo_eval:/app/eval/results
+    restart: unless-stopped
+
+volumes:
+  demo_indices:
+  demo_eval:

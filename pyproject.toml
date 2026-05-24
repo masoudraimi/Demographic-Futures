@@ -1,0 +1,33 @@
+[project]
+name = "demographic-futures"
+version = "0.1.0"
+description = "RAG system for demographic intelligence — population aging, fertility, migration, and workforce trends across Australia and OECD peers"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langchain>=0.3",
+    "langchain-openai>=0.2",
+    "langchain-community>=0.3",
+    "langchain-chroma>=0.1",
+    "langchain-huggingface>=0.1",
+    "chromadb>=0.5",
+    "sentence-transformers>=3.0",
+    "ragas>=0.2",
+    "streamlit>=1.35",
+    "pandas>=2.0",
+    "plotly>=5.15",
+    "python-dotenv>=1.0",
+    "rank-bm25>=0.2",
+    "datasets>=2.0",
+    "torchvision>=0.27.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
