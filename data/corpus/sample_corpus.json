@@ -3186,5 +3186,575 @@
       530
     ],
     "metric_label": "Population by 5-year age band (thousands, 2022)"
+  },
+  {
+    "id": "eci_jpn_116",
+    "title": "Japan: Economic Complexity Index 2000\u20132022",
+    "content": "Japan's Economic Complexity Index (ECI) score in 2022 was 2.30, placing it at rank 191 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. Japan consistently leads global rankings for economic complexity, reflecting its highly diversified manufacturing base across electronics, automotive, and precision machinery.",
+    "year": 2022,
+    "country": "Japan",
+    "region": "Asia",
+    "source_org": "METI",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      2.05,
+      2.12,
+      2.18,
+      2.22,
+      2.25,
+      2.28,
+      2.3
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_deu_117",
+    "title": "Germany: Economic Complexity Index 2000\u20132022",
+    "content": "Germany's Economic Complexity Index (ECI) score in 2022 was 2.10, placing it at rank 181 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Germany",
+    "region": "Western Europe",
+    "source_org": "Destatis",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.95,
+      2.0,
+      2.04,
+      2.06,
+      2.08,
+      2.09,
+      2.1
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_kor_118",
+    "title": "South Korea: Economic Complexity Index 2000\u20132022",
+    "content": "South Korea's Economic Complexity Index (ECI) score in 2022 was 1.98, placing it at rank 175 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "South Korea",
+    "region": "Asia",
+    "source_org": "KOSIS",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.55,
+      1.68,
+      1.78,
+      1.85,
+      1.92,
+      1.96,
+      1.98
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_che_119",
+    "title": "Switzerland: Economic Complexity Index 2000\u20132022",
+    "content": "Switzerland's Economic Complexity Index (ECI) score in 2022 was 1.97, placing it at rank 174 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Switzerland",
+    "region": "Western Europe",
+    "source_org": "FSO",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.8,
+      1.85,
+      1.89,
+      1.92,
+      1.94,
+      1.96,
+      1.97
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_swe_120",
+    "title": "Sweden: Economic Complexity Index 2000\u20132022",
+    "content": "Sweden's Economic Complexity Index (ECI) score in 2022 was 1.75, placing it at rank 164 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Sweden",
+    "region": "Northern Europe",
+    "source_org": "SCB",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.6,
+      1.65,
+      1.68,
+      1.7,
+      1.72,
+      1.74,
+      1.75
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_usa_121",
+    "title": "United States: Economic Complexity Index 2000\u20132022",
+    "content": "United States's Economic Complexity Index (ECI) score in 2022 was 1.72, placing it at rank 162 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "United States",
+    "region": "North America",
+    "source_org": "BEA",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.65,
+      1.67,
+      1.68,
+      1.7,
+      1.71,
+      1.71,
+      1.72
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_fin_122",
+    "title": "Finland: Economic Complexity Index 2000\u20132022",
+    "content": "Finland's Economic Complexity Index (ECI) score in 2022 was 1.70, placing it at rank 161 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Finland",
+    "region": "Northern Europe",
+    "source_org": "Stats Finland",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.55,
+      1.6,
+      1.63,
+      1.66,
+      1.68,
+      1.69,
+      1.7
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_fra_123",
+    "title": "France: Economic Complexity Index 2000\u20132022",
+    "content": "France's Economic Complexity Index (ECI) score in 2022 was 1.52, placing it at rank 152 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "France",
+    "region": "Western Europe",
+    "source_org": "INSEE",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.42,
+      1.45,
+      1.47,
+      1.49,
+      1.5,
+      1.51,
+      1.52
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_nld_124",
+    "title": "Netherlands: Economic Complexity Index 2000\u20132022",
+    "content": "Netherlands's Economic Complexity Index (ECI) score in 2022 was 1.58, placing it at rank 155 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Netherlands",
+    "region": "Western Europe",
+    "source_org": "CBS",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.45,
+      1.49,
+      1.52,
+      1.54,
+      1.56,
+      1.57,
+      1.58
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_gbr_125",
+    "title": "United Kingdom: Economic Complexity Index 2000\u20132022",
+    "content": "United Kingdom's Economic Complexity Index (ECI) score in 2022 was 1.40, placing it at rank 146 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "United Kingdom",
+    "region": "Western Europe",
+    "source_org": "ONS",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.38,
+      1.39,
+      1.4,
+      1.4,
+      1.4,
+      1.4,
+      1.4
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_ita_126",
+    "title": "Italy: Economic Complexity Index 2000\u20132022",
+    "content": "Italy's Economic Complexity Index (ECI) score in 2022 was 1.28, placing it at rank 140 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Italy",
+    "region": "Southern Europe",
+    "source_org": "ISTAT",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      1.22,
+      1.24,
+      1.26,
+      1.27,
+      1.28,
+      1.28,
+      1.28
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_chn_127",
+    "title": "China: Economic Complexity Index 2000\u20132022",
+    "content": "China's Economic Complexity Index (ECI) score in 2022 was 1.31, placing it at rank 142 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "China",
+    "region": "Asia",
+    "source_org": "NBS China",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      0.55,
+      0.75,
+      0.9,
+      1.05,
+      1.18,
+      1.26,
+      1.31
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_esp_128",
+    "title": "Spain: Economic Complexity Index 2000\u20132022",
+    "content": "Spain's Economic Complexity Index (ECI) score in 2022 was 0.88, placing it at rank 120 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Spain",
+    "region": "Southern Europe",
+    "source_org": "INE",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      0.8,
+      0.82,
+      0.84,
+      0.85,
+      0.86,
+      0.87,
+      0.88
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_can_129",
+    "title": "Canada: Economic Complexity Index 2000\u20132022",
+    "content": "Canada's Economic Complexity Index (ECI) score in 2022 was 0.62, placing it at rank 107 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Canada",
+    "region": "North America",
+    "source_org": "StatsCan",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      0.6,
+      0.61,
+      0.61,
+      0.62,
+      0.62,
+      0.62,
+      0.62
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_nzl_130",
+    "title": "New Zealand: Economic Complexity Index 2000\u20132022",
+    "content": "New Zealand's Economic Complexity Index (ECI) score in 2022 was 0.42, placing it at rank 97 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "New Zealand",
+    "region": "Oceania",
+    "source_org": "Stats NZ",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      0.38,
+      0.39,
+      0.4,
+      0.41,
+      0.41,
+      0.42,
+      0.42
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_nor_131",
+    "title": "Norway: Economic Complexity Index 2000\u20132022",
+    "content": "Norway's Economic Complexity Index (ECI) score in 2022 was 0.72, placing it at rank 112 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Norway",
+    "region": "Northern Europe",
+    "source_org": "SSB",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      0.65,
+      0.67,
+      0.69,
+      0.7,
+      0.71,
+      0.72,
+      0.72
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_grc_132",
+    "title": "Greece: Economic Complexity Index 2000\u20132022",
+    "content": "Greece's Economic Complexity Index (ECI) score in 2022 was 0.08, placing it at rank 80 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "Greece",
+    "region": "Southern Europe",
+    "source_org": "ELSTAT",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      0.25,
+      0.2,
+      0.15,
+      0.12,
+      0.1,
+      0.09,
+      0.08
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_ind_133",
+    "title": "India: Economic Complexity Index 2000\u20132022",
+    "content": "India's Economic Complexity Index (ECI) score in 2022 was 0.30, placing it at rank 91 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. ",
+    "year": 2022,
+    "country": "India",
+    "region": "Asia",
+    "source_org": "MoSPI",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.28,
+      0.3
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
+  },
+  {
+    "id": "eci_aus_134",
+    "title": "Australia: Economic Complexity Index 2000\u20132022",
+    "content": "Australia's Economic Complexity Index (ECI) score in 2022 was -0.52, placing it at rank 50 on the global complexity scale. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. Australia, despite its high GDP per capita of approximately USD 65,400, ranks 105th in economic complexity \u2014 between Botswana and the Ivory Coast \u2014 because its wealth derives primarily from resource exports (mining, agriculture) rather than complex manufacturing or services.",
+    "year": 2022,
+    "country": "Australia",
+    "region": "Oceania",
+    "source_org": "ABS",
+    "publication": "OEC Atlas of Economic Complexity 2022",
+    "topic": "economic_complexity",
+    "metric_years": [
+      2000,
+      2003,
+      2007,
+      2011,
+      2015,
+      2019,
+      2022
+    ],
+    "metric_values": [
+      -0.35,
+      -0.38,
+      -0.42,
+      -0.46,
+      -0.49,
+      -0.51,
+      -0.52
+    ],
+    "metric_label": "Economic Complexity Index (ECI)"
   }
 ]

@@ -31,6 +31,7 @@ _TOPIC_LABELS = {
     "social_cohesion": "Social Cohesion",
     "healthcare": "Healthcare",
     "pension": "Pension Systems",
+    "economic_complexity": "Economic Complexity (ECI)",
 }
 
 _COUNTRY_COLORS = [
@@ -110,9 +111,126 @@ def _render_choropleth(docs: list[Document], topic: str) -> None:
     st.caption(f"Showing latest available value per country for {_TOPIC_LABELS[topic].lower()}.")
 
 
+def _render_cross_domain(docs: list[Document]) -> None:
+    """Dual-axis chart: ECI on left, any demographic indicator on right."""
+    st.markdown("#### Cross-Domain Explorer — Economic Complexity vs Demographic Indicator")
+    st.caption(
+        "Simon's key insight: Australia ranks #105 in Economic Complexity despite high GDP per capita. "
+        "Explore how ECI correlates with demographic indicators across OECD peers."
+    )
+
+    eci_countries = _get_countries_for_topic(docs, "economic_complexity")
+    if not eci_countries:
+        st.warning("ECI data not found in corpus. Rebuild indices after adding ECI entries.")
+        return
+
+    demo_topics = {k: v for k, v in _TOPIC_LABELS.items() if k != "economic_complexity"}
+
+    col1, col2, col3 = st.columns([2, 2, 3])
+    with col1:
+        selected_demo = st.selectbox(
+            "Demographic indicator",
+            options=list(demo_topics.keys()),
+            format_func=lambda t: demo_topics[t],
+            key="xdomain_demo",
+        )
+    with col2:
+        demo_countries = _get_countries_for_topic(docs, selected_demo)
+        common = sorted(set(eci_countries) & set(demo_countries))
+        if not common:
+            st.warning("No countries with both ECI and selected indicator.")
+            return
+        selected_countries = st.multiselect(
+            "Countries",
+            options=common,
+            default=common[:6],
+            key="xdomain_countries",
+        )
+
+    if not selected_countries:
+        col3.info("Select at least one country.")
+        return
+
+    # Gather data
+    eci_docs = {
+        d.metadata["country"]: d
+        for d in docs
+        if d.metadata.get("topic") == "economic_complexity"
+        and d.metadata.get("country") in selected_countries
+        and d.metadata.get("metric_years")
+    }
+    demo_docs = {
+        d.metadata["country"]: d
+        for d in docs
+        if d.metadata.get("topic") == selected_demo
+        and d.metadata.get("country") in selected_countries
+        and d.metadata.get("metric_years")
+    }
+
+    fig = go.Figure()
+    demo_label = ""
+    for i, country in enumerate(selected_countries):
+        color = _COUNTRY_COLORS[i % len(_COUNTRY_COLORS)]
+        if country in eci_docs:
+            e = eci_docs[country].metadata
+            fig.add_trace(go.Scatter(
+                x=e["metric_years"], y=e["metric_values"],
+                name=f"{country} ECI",
+                mode="lines", line=dict(color=color, width=2),
+                yaxis="y1",
+                hovertemplate=f"<b>{country} ECI</b><br>Year: %{{x}}<br>Score: %{{y:.2f}}<extra></extra>",
+            ))
+        if country in demo_docs:
+            d = demo_docs[country].metadata
+            demo_label = demo_label or d.get("metric_label", demo_topics[selected_demo])
+            fig.add_trace(go.Bar(
+                x=d["metric_years"], y=d["metric_values"],
+                name=f"{country} {demo_topics[selected_demo]}",
+                marker_color=color, opacity=0.35,
+                yaxis="y2",
+                hovertemplate=f"<b>{country}</b><br>Year: %{{x}}<br>{demo_label}: %{{y}}<extra></extra>",
+            ))
+
+    # Highlight Australia if present
+    if "Australia" in eci_docs:
+        e = eci_docs["Australia"].metadata
+        latest_idx = -1
+        fig.add_annotation(
+            x=e["metric_years"][latest_idx], y=e["metric_values"][latest_idx],
+            text="AU (rank 105)", showarrow=True, arrowhead=2,
+            ax=-50, ay=-30, font=dict(color="#E74C3C", size=10), arrowcolor="#E74C3C",
+        )
+
+    fig.update_layout(
+        title=f"Economic Complexity (ECI) vs {demo_topics[selected_demo]}",
+        xaxis=dict(title="Year", showgrid=True, gridcolor="rgba(255,255,255,0.08)"),
+        yaxis=dict(title="ECI Score", showgrid=True, gridcolor="rgba(255,255,255,0.08)",
+                   color="#00D4FF"),
+        yaxis2=dict(title=demo_label, overlaying="y", side="right",
+                    showgrid=False, color="#F39C12"),
+        legend=dict(orientation="h", y=1.05),
+        barmode="group",
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#e0e0e0"),
+    )
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption("Lines = ECI score (left axis) · Bars = demographic indicator (right axis)")
+
+
 def render_timeline_tab(docs: list[Document]) -> None:
     st.header("Trend Timeline")
     st.caption("Explore how demographic indicators have shifted over time across countries. Data is read directly from source metadata — no AI generation.")
+
+    view_mode = st.radio(
+        "View mode",
+        ["Line chart", "Choropleth map", "Cross-Domain (ECI)"],
+        horizontal=True,
+    )
+
+    if view_mode == "Cross-Domain (ECI)":
+        _render_cross_domain(docs)
+        return
 
     col1, col2 = st.columns([2, 3])
 
@@ -122,8 +240,6 @@ def render_timeline_tab(docs: list[Document]) -> None:
             options=list(_TOPIC_LABELS.keys()),
             format_func=lambda t: _TOPIC_LABELS[t],
         )
-
-        view_mode = st.radio("View mode", ["Line chart", "Choropleth map"], horizontal=True)
 
         available_countries = _get_countries_for_topic(docs, selected_topic)
 
