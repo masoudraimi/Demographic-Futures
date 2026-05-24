@@ -39,22 +39,68 @@ def _source_card(doc: Document, idx: int) -> None:
         st.markdown(f"> {excerpt}")
 
 
-def render_chat_tab(retriever) -> None:
+_CONFIDENCE_COLORS = {"high": "#2ECC71", "medium": "#F39C12", "low": "#E74C3C"}
+
+
+def _structured_answer_ui(answer_obj, sources: list[Document]) -> None:
+    confidence_color = _CONFIDENCE_COLORS.get(answer_obj.confidence, "#777")
+    st.markdown(answer_obj.answer)
+
+    if answer_obj.key_statistics:
+        st.markdown("**Key statistics**")
+        chips_html = " ".join(
+            f'<span style="background:rgba(74,144,226,0.15);border:1px solid #4A90E2;'
+            f'color:#e0e0e0;padding:3px 10px;border-radius:14px;font-size:0.78rem;'
+            f'margin:2px;display:inline-block">{s}</span>'
+            for s in answer_obj.key_statistics
+        )
+        st.markdown(chips_html, unsafe_allow_html=True)
+        st.markdown("")
+
+    col_conf, col_gap = st.columns(2)
+    with col_conf:
+        st.markdown(
+            f'<span style="background:{confidence_color};color:white;padding:3px 10px;'
+            f'border-radius:12px;font-size:0.78rem">Confidence: {answer_obj.confidence}</span>',
+            unsafe_allow_html=True,
+        )
+    with col_gap:
+        if answer_obj.data_gap:
+            st.warning("Data gap: corpus may not fully cover this question.", icon="⚠️")
+
+    if sources:
+        st.markdown("**Sources**")
+        for i, doc in enumerate(sources):
+            _source_card(doc, i)
+
+
+def render_chat_tab(retriever, structured_mode: bool = False) -> None:
     st.header("Ask about demographic trends")
 
+    chain_key = f"chain_{'structured' if structured_mode else 'standard'}"
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    if "chain" not in st.session_state:
-        from rag.pipeline import build_chain_with_sources
-        st.session_state.chain = build_chain_with_sources(retriever)
+    if chain_key not in st.session_state:
+        if structured_mode:
+            from rag.pipeline import build_structured_chain
+            st.session_state[chain_key] = build_structured_chain(retriever)
+        else:
+            from rag.pipeline import build_chain_with_sources
+            st.session_state[chain_key] = build_chain_with_sources(retriever)
+
+    chain = st.session_state[chain_key]
+
+    if structured_mode:
+        st.caption("Structured output mode — answers include grounded statistics, confidence level, and data-gap signal.")
 
     for msg in st.session_state.messages:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
             if msg["role"] == "assistant" and msg.get("sources"):
-                st.markdown("**Sources**")
-                for i, doc in enumerate(msg["sources"]):
-                    _source_card(doc, i)
+                if not msg.get("structured"):
+                    st.markdown("**Sources**")
+                    for i, doc in enumerate(msg["sources"]):
+                        _source_card(doc, i)
 
     if prompt := st.chat_input("e.g. How does Australia's fertility rate compare to Japan's?"):
         st.session_state.messages.append({"role": "user", "content": prompt})
@@ -63,17 +109,24 @@ def render_chat_tab(retriever) -> None:
 
         with st.chat_message("assistant"):
             with st.spinner("Searching corpus…"):
-                result = st.session_state.chain.invoke(prompt)
-                answer = result["answer"]
+                result = chain.invoke(prompt)
                 sources: list[Document] = result["sources"]
 
-            st.markdown(answer)
+            if structured_mode:
+                answer_obj = result["answer"]
+                _structured_answer_ui(answer_obj, sources)
+                answer_text = answer_obj.answer
+            else:
+                answer_text = result["answer"]
+                st.markdown(answer_text)
+                if sources:
+                    st.markdown("**Sources**")
+                    for i, doc in enumerate(sources):
+                        _source_card(doc, i)
 
-            if sources:
-                st.markdown("**Sources**")
-                for i, doc in enumerate(sources):
-                    _source_card(doc, i)
-
-        st.session_state.messages.append(
-            {"role": "assistant", "content": answer, "sources": sources}
-        )
+        st.session_state.messages.append({
+            "role": "assistant",
+            "content": answer_text,
+            "sources": sources,
+            "structured": structured_mode,
+        })

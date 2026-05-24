@@ -10,6 +10,16 @@ import plotly.graph_objects as go
 import streamlit as st
 from langchain_core.documents import Document
 
+_COUNTRY_ISO = {
+    "Australia": "AUS", "Japan": "JPN", "South Korea": "KOR",
+    "Germany": "DEU", "France": "FRA", "United Kingdom": "GBR",
+    "Canada": "CAN", "Italy": "ITA", "Sweden": "SWE",
+    "New Zealand": "NZL", "Finland": "FIN", "Netherlands": "NLD",
+    "Spain": "ESP", "Norway": "NOR", "Switzerland": "CHE",
+    "China": "CHN", "India": "IND", "United States": "USA",
+    "Greece": "GRC",
+}
+
 _TOPIC_LABELS = {
     "fertility": "Fertility",
     "aging": "Population Aging",
@@ -38,6 +48,68 @@ def _get_countries_for_topic(docs: list[Document], topic: str) -> list[str]:
     })
 
 
+def _latest_value(docs: list[Document], topic: str, country: str) -> float | None:
+    candidates = [
+        d for d in docs
+        if d.metadata.get("topic") == topic
+        and d.metadata.get("country") == country
+        and d.metadata.get("metric_years")
+    ]
+    if not candidates:
+        return None
+    doc = max(candidates, key=lambda d: d.metadata.get("year", 0))
+    values = doc.metadata.get("metric_values", [])
+    return values[-1] if values else None
+
+
+def _render_choropleth(docs: list[Document], topic: str) -> None:
+    all_countries = _get_countries_for_topic(docs, topic)
+    iso_codes, values, country_names, metric_label = [], [], [], ""
+
+    for country in all_countries:
+        iso = _COUNTRY_ISO.get(country)
+        val = _latest_value(docs, topic, country)
+        if iso and val is not None:
+            iso_codes.append(iso)
+            values.append(val)
+            country_names.append(country)
+            if not metric_label:
+                for d in docs:
+                    if d.metadata.get("country") == country and d.metadata.get("topic") == topic:
+                        metric_label = d.metadata.get("metric_label", "Value")
+                        break
+
+    if not iso_codes:
+        st.warning("No mappable data for this indicator.")
+        return
+
+    fig = go.Figure(go.Choropleth(
+        locations=iso_codes,
+        z=values,
+        text=country_names,
+        colorscale="Blues",
+        reversescale=False,
+        colorbar_title=metric_label,
+        hovertemplate="<b>%{text}</b><br>" + metric_label + ": %{z}<extra></extra>",
+    ))
+    fig.update_layout(
+        title=f"{_TOPIC_LABELS[topic]} — Latest values by country",
+        geo=dict(
+            showframe=False,
+            showcoastlines=True,
+            bgcolor="rgba(0,0,0,0)",
+            landcolor="rgba(80,80,80,0.3)",
+            coastlinecolor="rgba(255,255,255,0.2)",
+        ),
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#e0e0e0"),
+        margin=dict(l=0, r=0, t=40, b=0),
+    )
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption(f"Showing latest available value per country for {_TOPIC_LABELS[topic].lower()}.")
+
+
 def render_timeline_tab(docs: list[Document]) -> None:
     st.header("Trend Timeline")
     st.caption("Explore how demographic indicators have shifted over time across countries. Data is read directly from source metadata — no AI generation.")
@@ -51,6 +123,8 @@ def render_timeline_tab(docs: list[Document]) -> None:
             format_func=lambda t: _TOPIC_LABELS[t],
         )
 
+        view_mode = st.radio("View mode", ["Line chart", "Choropleth map"], horizontal=True)
+
         available_countries = _get_countries_for_topic(docs, selected_topic)
 
         if not available_countries:
@@ -61,11 +135,15 @@ def render_timeline_tab(docs: list[Document]) -> None:
             "Select countries",
             options=available_countries,
             default=available_countries[:3],
+            disabled=(view_mode == "Choropleth map"),
+            help="Country selection is not used in map view — all countries are shown.",
         )
 
-        plot_btn = st.button("Plot trends", type="primary")
-
     with col2:
+        if view_mode == "Choropleth map":
+            _render_choropleth(docs, selected_topic)
+            return
+
         if not selected_countries:
             st.info("Select at least one country to plot.")
             return

@@ -34,15 +34,26 @@ def _load():
 
 retriever, docs, chunks = _load()
 
-tab_chat, tab_timeline, tab_system, tab_eval = st.tabs(["Chat", "Timeline", "System", "Evaluation"])
+tab_chat, tab_timeline, tab_futures, tab_system, tab_eval = st.tabs(
+    ["Chat", "Timeline", "Futures", "System", "Evaluation"]
+)
 
 with tab_chat:
     from components.chat_tab import render_chat_tab
-    render_chat_tab(retriever)
+    structured_mode = st.sidebar.toggle(
+        "Structured output",
+        value=False,
+        help="Returns a typed answer with key statistics, confidence, and data-gap signal.",
+    )
+    render_chat_tab(retriever, structured_mode=structured_mode)
 
 with tab_timeline:
     from components.timeline_tab import render_timeline_tab
     render_timeline_tab(docs)
+
+with tab_futures:
+    from components.futures_tab import render_futures_tab
+    render_futures_tab(docs)
 
 with tab_system:
     st.header("System info")

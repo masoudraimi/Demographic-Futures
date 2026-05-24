@@ -1,7 +1,10 @@
+from typing import Literal
+
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain_core.documents import Document
+from pydantic import BaseModel
 
 from rag.llm import get_llm
 
@@ -51,5 +54,39 @@ def build_chain_with_sources(retriever, streaming: bool = False):
 
     return RunnableParallel(
         answer=answer_chain,
+        sources=retriever,
+    )
+
+
+class DemographicAnswer(BaseModel):
+    """Structured demographic answer with grounded statistics and confidence signal."""
+    answer: str
+    key_statistics: list[str]
+    countries_mentioned: list[str]
+    confidence: Literal["high", "medium", "low"]
+    data_gap: bool
+
+
+_STRUCTURED_SYSTEM_PROMPT = """You are a demographic intelligence assistant. Answer using ONLY the context below.
+
+For key_statistics: extract verbatim quantitative claims with source and year, e.g. "TFR: 1.42 (ABS, 2022)".
+For confidence: "high" if context directly answers the question, "medium" if partial, "low" if mostly inferred.
+For data_gap: true if the context does not contain enough information to fully answer the question.
+
+Context:
+{context}"""
+
+_STRUCTURED_PROMPT = ChatPromptTemplate.from_messages([
+    ("system", _STRUCTURED_SYSTEM_PROMPT),
+    ("human", "{question}"),
+])
+
+
+def build_structured_chain(retriever):
+    llm = get_llm().with_structured_output(DemographicAnswer)
+    return RunnableParallel(
+        answer={"context": retriever | _format_docs, "question": RunnablePassthrough()}
+               | _STRUCTURED_PROMPT
+               | llm,
         sources=retriever,
     )
