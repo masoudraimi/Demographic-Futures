@@ -20,7 +20,9 @@
       "Bash(python -c \"import openpyxl; print\\('openpyxl available'\\); wb = openpyxl.load_workbook\\('data/33010DC01.xlsx', read_only=True, data_only=True\\); print\\('Sheets:', wb.sheetnames\\)\")",
       "Bash(pip install *)",
       "Bash(python -c ' *)",
-      "Bash(python -c \"import json; data=json.load\\(open\\('c:/Users/mmrah/OneDrive/Documents/GitHub/Demographic-Futures/data/corpus/sample_corpus.json', encoding='utf-8'\\)\\); print\\(f'OK — {len\\(data\\)} entries loaded'\\)\")"
+      "Bash(python -c \"import json; data=json.load\\(open\\('c:/Users/mmrah/OneDrive/Documents/GitHub/Demographic-Futures/data/corpus/sample_corpus.json', encoding='utf-8'\\)\\); print\\(f'OK — {len\\(data\\)} entries loaded'\\)\")",
+      "Bash(Get-ChildItem -Path . -Recurse -Depth 2)",
+      "Bash(findstr /E \"\\\\.py$|^d\")"
     ]
   }
 }

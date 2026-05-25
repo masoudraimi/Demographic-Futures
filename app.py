@@ -9,11 +9,11 @@ st.set_page_config(
     page_title="Demographic Futures",
     page_icon="🌍",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
 # ---------------------------------------------------------------------------
-# Global dark-neon CSS (ColdMath-inspired)
+# Global CSS
 # ---------------------------------------------------------------------------
 st.markdown("""
 <style>
@@ -33,16 +33,6 @@ html, body, [data-testid="stApp"] {
 [data-testid="stMetricValue"] { color: #00D4FF; }
 [data-testid="stMetricDelta"] { font-size: 0.8rem; }
 
-/* Tabs */
-[data-testid="stTabs"] button {
-    font-weight: 600;
-    letter-spacing: 0.03em;
-}
-[data-testid="stTabs"] button[aria-selected="true"] {
-    color: #00D4FF;
-    border-bottom: 2px solid #00D4FF;
-}
-
 /* Sidebar */
 [data-testid="stSidebar"] {
     background-color: #0a0a0a;
@@ -55,7 +45,7 @@ html, body, [data-testid="stApp"] {
     border-left: 3px solid #00D4FF;
 }
 
-/* Buttons */
+/* Primary buttons */
 [data-testid="stBaseButton-primary"] {
     background: linear-gradient(135deg, #00D4FF22, #00D4FF44);
     border: 1px solid #00D4FF;
@@ -63,11 +53,9 @@ html, body, [data-testid="stApp"] {
 }
 
 /* Dividers */
-hr {
-    border-color: rgba(255,255,255,0.08) !important;
-}
+hr { border-color: rgba(255,255,255,0.08) !important; }
 
-/* Glass card helper — apply via st.markdown unsafe_allow_html */
+/* Glass card */
 .glass-card {
     background: rgba(255,255,255,0.04);
     backdrop-filter: blur(8px);
@@ -76,14 +64,14 @@ hr {
     padding: 16px 20px;
 }
 
-/* Story step headline */
+/* Story section headline */
 .story-headline {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
     font-weight: 700;
     color: #E8E8E8;
     letter-spacing: -0.02em;
     line-height: 1.25;
-    margin-bottom: 4px;
+    margin-bottom: 14px;
 }
 
 /* Planning implication callout */
@@ -92,32 +80,44 @@ hr {
     border-left: 3px solid #00D4FF;
     border-radius: 0 8px 8px 0;
     padding: 12px 16px;
-    margin-top: 12px;
+    margin-top: 16px;
     font-size: 0.88rem;
     color: #B0C4CE;
+    line-height: 1.6;
 }
 
-/* Quote block */
-.simon-quote {
-    border-left: 3px solid rgba(255,200,0,0.5);
-    padding: 8px 14px;
-    margin: 10px 0;
-    font-style: italic;
-    color: #C8B87A;
-    font-size: 0.9rem;
+/* Section divider */
+.section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 52px 0 28px;
+    color: #555;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.section-divider::before,
+.section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #222;
 }
 
-/* Step indicator dots */
-.step-dots {
-    display: flex; gap: 6px; justify-content: center;
-    margin: 8px 0;
+/* Expander headers */
+[data-testid="stExpander"] summary {
+    font-size: 0.92rem;
+    color: #888;
+    font-weight: 500;
 }
-.step-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    display: inline-block;
+
+/* Body text line-height */
+[data-testid="stMarkdownContainer"] p {
+    line-height: 1.75;
+    color: #C8C8C8;
 }
-.step-dot.active { background: #00D4FF; box-shadow: 0 0 6px #00D4FF; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -125,7 +125,7 @@ hr {
 # ---------------------------------------------------------------------------
 # Load RAG indices (cached)
 # ---------------------------------------------------------------------------
-@st.cache_resource(show_spinner="Loading corpus and building indices (first run ~10s)…")
+@st.cache_resource(show_spinner="Loading corpus and building indices (first run ~10 s)…")
 def _load():
     from rag import (
         build_indices, build_retriever, chunk_documents, load_corpus, load_indices,
@@ -147,37 +147,63 @@ def _load():
 retriever, docs, chunks = _load()
 
 # ---------------------------------------------------------------------------
-# Tabs
+# Sidebar — Chat
 # ---------------------------------------------------------------------------
-tab_story, tab_chat, tab_timeline, tab_futures, tab_pipeline, tab_eval = st.tabs(
-    ["Story", "Chat", "Timeline", "Futures", "Pipeline", "Evaluation"]
+with st.sidebar:
+    st.markdown(
+        '<div style="padding:8px 0 4px">'
+        '<span style="font-size:1.05rem;font-weight:700;color:#E8E8E8">'
+        "Ask about demographics</span></div>"
+        '<p style="font-size:0.75rem;color:#555;margin:0 0 12px">'
+        "Hybrid RAG · BM25 + vector search over 134 corpus entries</p>",
+        unsafe_allow_html=True,
+    )
+    from components.chat_tab import render_chat_tab
+    render_chat_tab(retriever)
+
+# ---------------------------------------------------------------------------
+# Main page — scrollable dashboard
+# ---------------------------------------------------------------------------
+from components.dashboard import (
+    render_hero,
+    render_overview_grid,
+    render_section_1,
+    render_section_2,
+    render_section_3,
+    render_section_4,
+    render_section_5,
+    render_section_6,
+    render_section_7,
 )
 
-with tab_story:
-    from components.story_tab import render_story_tab
-    render_story_tab()
+render_hero()
+render_overview_grid(docs)
+render_section_1()
+render_section_2()
+render_section_3()
+render_section_4()
+render_section_5()
+render_section_6()
+render_section_7()
 
-with tab_chat:
-    from components.chat_tab import render_chat_tab
-    structured_mode = st.sidebar.toggle(
-        "Structured output",
-        value=False,
-        help="Returns a typed answer with key statistics, confidence, and data-gap signal.",
-    )
-    render_chat_tab(retriever, structured_mode=structured_mode)
+# ---------------------------------------------------------------------------
+# Collapsible appendices
+# ---------------------------------------------------------------------------
+st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
 
-with tab_timeline:
-    from components.timeline_tab import render_timeline_tab
-    render_timeline_tab(docs)
-
-with tab_futures:
+with st.expander("📊  Scenario Projections & Population Pyramids", expanded=False):
     from components.futures_tab import render_futures_tab
     render_futures_tab(docs)
 
-with tab_pipeline:
-    from components.pipeline_tab import render_pipeline_tab
-    render_pipeline_tab(retriever, docs, chunks)
+with st.expander("📈  Country Trend Explorer", expanded=False):
+    from components.timeline_tab import render_timeline_tab
+    render_timeline_tab(docs)
 
-with tab_eval:
-    from components.eval_tab import render_eval_tab
-    render_eval_tab()
+with st.expander("⚙️  Technical: Pipeline & Evaluation", expanded=False):
+    tab_p, tab_e = st.tabs(["Pipeline", "Evaluation"])
+    with tab_p:
+        from components.pipeline_tab import render_pipeline_tab
+        render_pipeline_tab(retriever, docs, chunks)
+    with tab_e:
+        from components.eval_tab import render_eval_tab
+        render_eval_tab()
