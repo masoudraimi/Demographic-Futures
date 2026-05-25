@@ -3729,13 +3729,13 @@
   },
   {
     "id": "eci_aus_134",
-    "title": "Australia: Economic Complexity Index 2000–2022",
-    "content": "Australia's Economic Complexity Index (ECI) score in 2022 was -0.52, ranking it 105th in economic complexity globally. The ECI measures the diversity and sophistication of a country's export basket. A higher score indicates a more diversified, knowledge-intensive economy. Australia, despite its high GDP per capita of approximately USD 65,400, ranks 105th in economic complexity — between Botswana and the Ivory Coast — because its wealth derives primarily from resource exports (mining, agriculture) rather than complex manufacturing or services.",
-    "year": 2022,
+    "title": "Australia: Economic Complexity Index 2000–2024",
+    "content": "Australia's Economic Complexity Index (ECI) score in 2024 was -0.61, ranking it 89th out of 166 countries (OEC HS92). The ECI measures the diversity and sophistication of a country's export basket. Australia held a positive ECI score in 2000 (+0.31) and crossed into negative territory around 2005–06 as the commodities boom shifted exports away from manufactures. Despite a GDP per capita of approximately USD 65,400, Australia ranks 89th in economic complexity because its wealth derives primarily from resource exports (mining, agriculture) rather than complex manufacturing or services.",
+    "year": 2024,
     "country": "Australia",
     "region": "Oceania",
-    "source_org": "ABS",
-    "publication": "OEC Atlas of Economic Complexity 2022",
+    "source_org": "Observatory of Economic Complexity",
+    "publication": "OEC Country Complexity Rankings 2024 (HS92)",
     "topic": "economic_complexity",
     "metric_years": [
       2000,
@@ -3744,16 +3744,18 @@
       2011,
       2015,
       2019,
-      2022
+      2022,
+      2024
     ],
     "metric_values": [
-      -0.35,
-      -0.38,
+      0.31,
+      0.16,
+      -0.07,
+      -0.43,
       -0.42,
-      -0.46,
-      -0.49,
-      -0.51,
-      -0.52
+      -0.52,
+      -0.52,
+      -0.61
     ],
     "metric_label": "Economic Complexity Index (ECI)"
   }

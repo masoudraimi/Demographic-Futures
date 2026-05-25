@@ -39,13 +39,29 @@ def _sparkline_fig(years: list, values: list) -> go.Figure:
         hovertemplate="%{x}: %{y:.2f}<extra></extra>",
     ))
     fig.update_layout(
-        height=80,
-        margin=dict(l=0, r=0, t=4, b=0),
+        height=120,
+        margin=dict(l=36, r=4, t=4, b=28),
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         showlegend=False,
-        xaxis=dict(visible=False),
-        yaxis=dict(visible=False),
+        xaxis=dict(
+            visible=True,
+            tickfont=dict(size=9, color="#aaa"),
+            tickmode="auto",
+            nticks=4,
+            showgrid=False,
+            zeroline=False,
+            tickangle=0,
+        ),
+        yaxis=dict(
+            visible=True,
+            tickfont=dict(size=9, color="#aaa"),
+            tickmode="auto",
+            nticks=4,
+            showgrid=True,
+            gridcolor="rgba(255,255,255,0.06)",
+            zeroline=False,
+        ),
     )
     return fig
 
@@ -100,7 +116,7 @@ def render_hero() -> None:
         ("1.54",   "Total Fertility\nRate (2024)",      "abs_births_2024", "hero_tfr"),
         ("518K",   "Net Overseas\nMigration 2022-23",   "abs_nom_2425",    "hero_nom"),
         ("16.8%",  "Population\naged 65+",              "oecd_2026",       "hero_age"),
-        ("#105",   "ECI Rank\n(OEC Atlas 2022)",        None,              ""),
+        ("#89",    "ECI Rank\n(OEC HS92 2024)",          "oec_hs92_2024",   "hero_eci"),
     ]
 
     cols = st.columns(5)
@@ -136,7 +152,7 @@ def render_overview_grid(docs: list[Document]) -> None:
         ("migration",           "Net Overseas Migration",            "abs_nom_2425",     "og_mig"),
         ("life_expectancy",     "Life Expectancy (years)",           "oecd_2026",        "og_le"),
         ("workforce",           "55–74 Labour Participation (%)",    "abs_lf_2026",      "og_work"),
-        ("economic_complexity", "ECI Score (lower = less complex)",  None,               ""),
+        ("economic_complexity", "ECI Score (lower = less complex)",  "oec_hs92_2024",    "og_eci"),
     ]
 
     for row in [grid[:3], grid[3:]]:
@@ -169,6 +185,8 @@ def render_overview_grid(docs: list[Document]) -> None:
                         st.caption("No data")
                     if cite_key:
                         render_cite(cite_key, suffix)
+                    else:
+                        st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
         st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
 
@@ -441,13 +459,14 @@ def render_section_7() -> None:
 
     with col_story:
         _story_col_header(
-            "Australia ranks 105th in Economic Complexity — and it doesn't matter (yet)"
+            "Australia ranks 89th in Economic Complexity — and it doesn't matter (yet)"
         )
         st.markdown(
             """
-Australia's **ECI rank is 105** out of 133 countries — placing it between Botswana
-and the Ivory Coast, despite a GDP per capita of **USD 65,400** [¹]. Japan leads at
-rank 1; Germany is 3rd.
+Australia's **ECI rank is 89** out of 166 countries — despite a GDP per capita of
+**USD 65,400** [¹]. Australia's ECI score crossed from positive into negative territory
+around 2005–06, driven by the commodities boom shifting exports away from manufactures.
+Chinese Taipei leads the world at rank 1, followed by Japan and Switzerland.
 
 The wealth gap is explained by strong institutions distributing mining and resource
 revenue equitably across the population. This is **not a permanent advantage**.
@@ -459,11 +478,13 @@ revenue equitably across the population. This is **not a permanent advantage**.
             """
         )
         _planning_callout(
-            "If Australia loses institutional quality or commodity prices fall, its rank-105 "
+            "If Australia loses institutional quality or commodity prices fall, its rank-89 "
             "complexity offers no buffer. Diversification through the knowledge economy is not "
             "optional — it is a long-run survival question."
         )
         st.caption("Sources:")
-        c1, _ = st.columns([1, 5])
+        c1, c2, _ = st.columns([1, 1, 4])
         with c1:
             render_cite("oecd_2026", "s7")
+        with c2:
+            render_cite("oec_hs92_2024", "s7")

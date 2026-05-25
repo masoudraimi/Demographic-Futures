@@ -59,10 +59,16 @@ CITATIONS: dict[str, dict] = {
         "file": "data/GSSDC01.xlsx",
         "year": 2025,
     },
+    "oec_hs92_2024": {
+        "label": "OEC Country Complexity Rankings 2024 (HS92)",
+        "org": "Observatory of Economic Complexity",
+        "file": "data/HS92/country-rankings-2024-complexity-20260526091559.csv",
+        "year": 2024,
+    },
 }
 
 _KEYS = list(CITATIONS.keys())
-_SUPERSCRIPTS = ["¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸"]
+_SUPERSCRIPTS = ["¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰", "¹¹", "¹²"]
 _CITE_INDEX: dict[str, int] = {k: i for i, k in enumerate(_KEYS)}
 
 
