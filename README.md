@@ -6,7 +6,15 @@
 [![LangChain](https://img.shields.io/badge/LangChain-0.3-green.svg)](https://python.langchain.com/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5-orange.svg)](https://www.trychroma.com/)
 [![RAGAS](https://img.shields.io/badge/RAGAS-0.2-purple.svg)](https://docs.ragas.io/)
+[![Live App](https://img.shields.io/badge/Live%20App-Streamlit-ff4b4b.svg)](https://australian-demographic-futures.streamlit.app/)
 
+
+
+## Live Demo
+
+For a live demo, click here:
+
+> **[Open the live app →](https://australian-demographic-futures.streamlit.app/)**
 ---
 
 ## What it does
