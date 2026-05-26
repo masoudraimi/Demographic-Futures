@@ -13,14 +13,14 @@
 
 The app has two main parts.
 
-**Scrollable dashboard** — a data-driven narrative about Australia's demographic future across 7 story sections: the business model, demographic shift, population scenarios, workforce and skills, aged care, housing, and economic complexity. Every number on the page links to a downloadable source file.
+**Scrollable dashboard**: a data-driven narrative about Australia's demographic future across 7 story sections: the business model, demographic shift, population scenarios, workforce and skills, aged care, housing, and economic complexity. Every number on the page links to a downloadable source file.
 
-**RAG chat** — ask natural-language questions and get grounded, cited answers drawn from a curated corpus of 134 ABS, OECD, OEC, and Statistics Korea publications. The sidebar chat works on any page.
+**RAG chat**: ask natural-language questions and get grounded, cited answers drawn from a curated corpus of 134 ABS, OECD, OEC, and Statistics Korea publications. The sidebar chat works on any page.
 
 Additional tools are available in collapsible appendices at the bottom of the page:
-- **Scenario Projections and Population Pyramids** — interactive ABS Series A/B/C population charts
-- **Country Trend Explorer** — plot any demographic indicator across OECD peers over time
-- **Pipeline and Evaluation** — live retrieval trace and RAGAS benchmark results
+- **Scenario Projections and Population Pyramids**: interactive ABS Series A/B/C population charts
+- **Country Trend Explorer**: plot any demographic indicator across OECD peers over time
+- **Pipeline and Evaluation**: live retrieval trace and RAGAS benchmark results
 
 ---
 
