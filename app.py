@@ -1,4 +1,4 @@
-"""Demographic Futures — Streamlit entry point."""
+"""Australian Demographic Futures, Streamlit entry point."""
 from components.dashboard import (
     render_hero,
     render_overview_grid,
@@ -11,23 +11,27 @@ from components.dashboard import (
     render_section_7,
 )
 from pathlib import Path
+
 from dotenv import load_dotenv
 import streamlit as st
+
+from palette import CSS_VARS
 
 load_dotenv()
 
 st.set_page_config(
-    page_title="Demographic Futures",
-    page_icon="🌍",
+    page_title="Australian Demographic Futures",
+    page_icon="🇦🇺",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 # ---------------------------------------------------------------------------
-# Global CSS
+# Global CSS, inject :root vars from palette, then the stylesheet
 # ---------------------------------------------------------------------------
+_root_vars = "\n".join(f"  {k}: {v};" for k, v in CSS_VARS.items())
 _css = (Path(__file__).parent / "styles.css").read_text()
-st.markdown(f"<style>{_css}</style>", unsafe_allow_html=True)
+st.markdown(f"<style>:root {{\n{_root_vars}\n}}\n{_css}</style>", unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------------------------
@@ -55,13 +59,14 @@ def _load():
 retriever, docs, chunks = _load()
 
 # ---------------------------------------------------------------------------
-# Sidebar — Chat
+# Sidebar, Chat
 # ---------------------------------------------------------------------------
 with st.sidebar:
     st.markdown(
-        '<div style="padding:8px 0 4px">'
-        '<span style="font-size:1.05rem;font-weight:700;color:#E8E8E8">'
-        "Ask about demographics</span></div>"
+        '<div style="display:flex;align-items:center;gap:10px;padding:8px 0 4px">'
+        '<span style="font-size:2rem">🇦🇺</span>'
+        '<span style="font-size:1.05rem;font-weight:700;color:#E8E8E8">Ask about demographics</span>'
+        '</div>'
         '<p style="font-size:0.75rem;color:#555;margin:0 0 12px">'
         "Hybrid RAG · BM25 + vector search over 134 corpus entries</p>",
         unsafe_allow_html=True,
@@ -70,7 +75,7 @@ with st.sidebar:
     render_chat_tab(retriever)
 
 # ---------------------------------------------------------------------------
-# Main page — scrollable dashboard
+# Main page, scrollable dashboard
 # ---------------------------------------------------------------------------
 
 render_hero()

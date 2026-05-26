@@ -1,4 +1,4 @@
-"""Single-page scrollable dashboard — hero, overview grid, and 7 story sections."""
+"""Single-page scrollable dashboard, hero, overview grid, and 7 story sections."""
 from __future__ import annotations
 
 import plotly.graph_objects as go
@@ -6,6 +6,7 @@ import streamlit as st
 from langchain_core.documents import Document
 
 from components.references import render_cite
+from palette import GOLD, GOLD_RGB, TEXT_HEADING, TEXT_MUTED, TEXT_SUBTLE
 from components.story_tab import (
     _chart_age_distribution,
     _chart_aged_care,
@@ -33,9 +34,9 @@ def _sparkline_fig(years: list, values: list) -> go.Figure:
     fig.add_trace(go.Scatter(
         x=years, y=values,
         mode="lines",
-        line=dict(color="#00D4FF", width=2.5),
+        line=dict(color=GOLD, width=2.5),
         fill="tozeroy",
-        fillcolor="rgba(0,212,255,0.08)",
+        fillcolor=f"rgba({GOLD_RGB},0.08)",
         hovertemplate="%{x}: %{y:.2f}<extra></extra>",
     ))
     fig.update_layout(
@@ -46,7 +47,7 @@ def _sparkline_fig(years: list, values: list) -> go.Figure:
         showlegend=False,
         xaxis=dict(
             visible=True,
-            tickfont=dict(size=9, color="#aaa"),
+            tickfont=dict(size=9, color=TEXT_SUBTLE),
             tickmode="auto",
             nticks=4,
             showgrid=False,
@@ -55,7 +56,7 @@ def _sparkline_fig(years: list, values: list) -> go.Figure:
         ),
         yaxis=dict(
             visible=True,
-            tickfont=dict(size=9, color="#aaa"),
+            tickfont=dict(size=9, color=TEXT_SUBTLE),
             tickmode="auto",
             nticks=4,
             showgrid=True,
@@ -88,7 +89,7 @@ def _story_col_header(text: str) -> None:
 def _planning_callout(text: str) -> None:
     st.markdown(
         f'<div class="planning-callout">'
-        f'<strong style="color:#00D4FF">Planning implication</strong><br><br>'
+        f'<strong style="color:{GOLD}">Planning implication</strong><br><br>'
         f'{text}</div>',
         unsafe_allow_html=True,
     )
@@ -102,10 +103,10 @@ def _planning_callout(text: str) -> None:
 def render_hero() -> None:
     st.markdown(
         '<div style="padding:32px 0 20px">'
-        '<h1 style="font-size:2.6rem;font-weight:800;color:#E8E8E8;margin:0 0 6px;'
-        'letter-spacing:-0.03em">Demographic Futures</h1>'
-        '<p style="color:#888;font-size:1.05rem;margin:0 0 28px;max-width:640px">'
-        "Australia's population, workforce, and economy — from today to 2036 and beyond. "
+        f'<h1 style="font-size:2.6rem;font-weight:800;color:{TEXT_HEADING};margin:0 0 6px;'
+        f'letter-spacing:-0.03em">Australian Demographic Futures</h1>'
+        f'<p style="color:{TEXT_MUTED};font-size:1.05rem;margin:0 0 28px;max-width:640px">'
+        "Australia's population, workforce, and economy, from today to 2036 and beyond. "
         "A data-driven look at the structural forces shaping the nation.</p>"
         "</div>",
         unsafe_allow_html=True,
@@ -125,9 +126,9 @@ def render_hero() -> None:
             with st.container(border=True):
                 st.markdown(
                     f'<div style="text-align:center;padding:4px 0">'
-                    f'<span style="font-size:1.9rem;font-weight:700;color:#00D4FF;display:block">'
+                    f'<span style="font-size:1.9rem;font-weight:700;color:{GOLD};display:block">'
                     f"{value}</span>"
-                    f'<span style="font-size:0.68rem;color:#888;text-transform:uppercase;'
+                    f'<span style="font-size:0.68rem;color:{TEXT_MUTED};text-transform:uppercase;'
                     f'letter-spacing:0.08em">{label.replace(chr(10), " ")}</span>'
                     f"</div>",
                     unsafe_allow_html=True,
@@ -144,7 +145,7 @@ def render_hero() -> None:
 
 
 def render_overview_grid(docs: list[Document]) -> None:
-    _divider("AT A GLANCE — AUSTRALIA")
+    _divider("AT A GLANCE, AUSTRALIA")
 
     grid = [
         ("fertility",           "Total Fertility Rate",              "abs_births_2024", "og_fert"),
@@ -162,7 +163,7 @@ def render_overview_grid(docs: list[Document]) -> None:
             with col:
                 with st.container(border=True):
                     st.markdown(
-                        f'<p style="font-size:0.68rem;color:#888;text-transform:uppercase;'
+                        f'<p style="font-size:0.68rem;color:{TEXT_MUTED};text-transform:uppercase;'
                         f'letter-spacing:0.08em;margin:0 0 4px">{label}</p>',
                         unsafe_allow_html=True,
                     )
@@ -172,7 +173,7 @@ def render_overview_grid(docs: list[Document]) -> None:
                         if years and values:
                             latest = values[-1]
                             st.markdown(
-                                f'<span style="font-size:1.6rem;font-weight:700;color:#00D4FF">'
+                                f'<span style="font-size:1.6rem;font-weight:700;color:{GOLD}">'
                                 f"{latest}</span>",
                                 unsafe_allow_html=True,
                             )
@@ -191,7 +192,7 @@ def render_overview_grid(docs: list[Document]) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Section 1 — Business Model
+# Section 1, Business Model
 # ---------------------------------------------------------------------------
 
 
@@ -206,27 +207,27 @@ def render_section_1() -> None:
         _story_col_header("Australia operates on a very simple business model")
         st.markdown(
             """
-Australia's economy rests on **four structural pillars** — mining, agriculture, tourism,
-and international education — that have sustained **three decades without a recession**.
+Australia's economy rests on **four structural pillars**, mining, agriculture, tourism,
+and international education, that have sustained **three decades without a recession**.
 No other developed nation matches this record.
 
 > *"She'll be right" is a grounded observation, not complacency. Our four economic
 > pillars remain structurally sound long-term."*
-> — Simon Kuestenmacher
+>, Simon Kuestenmacher
 
 The question isn't whether this model works today. It's whether Australia is planning
-for the **3.5 million new residents** it will add by 2036 — and the infrastructure,
+for the **3.5 million new residents** it will add by 2036, and the infrastructure,
 housing, and services they will require.
             """
         )
         _planning_callout(
-            "Australia doesn't need to reinvent its economy — but it urgently needs "
+            "Australia doesn't need to reinvent its economy, but it urgently needs "
             "to plan for the people and pressures that economy will attract."
         )
 
 
 # ---------------------------------------------------------------------------
-# Section 2 — Demographic Shift
+# Section 2, Demographic Shift
 # ---------------------------------------------------------------------------
 
 
@@ -256,17 +257,17 @@ def render_section_2() -> None:
         _story_col_header("By 2036 Australia will be bigger, more youthful, and older")
         st.markdown(
             """
-Australia will grow from **28.0M** in 2026 to an estimated **31.5M** by 2036 —
+Australia will grow from **28.0M** in 2026 to an estimated **31.5M** by 2036,
 adding **3.5 million people** in a decade. Almost all of that growth is imported:
 international migrants aged 18–39.
 
 The under-18 cohort barely grows as the total fertility rate falls toward **1.3** [¹].
-Meanwhile the **85+ cohort nearly doubles** — a cohort that requires intensive care
+Meanwhile the **85+ cohort nearly doubles**, a cohort that requires intensive care
 and support, not primary schools.
 
 > *"Three and a half million new Australians. You shall not be bored. But this
 > population growth is not evenly distributed across the age spectrum."*
-> — Simon Kuestenmacher
+>, Simon Kuestenmacher
             """
         )
         _planning_callout(
@@ -280,7 +281,7 @@ and support, not primary schools.
 
 
 # ---------------------------------------------------------------------------
-# Section 3 — Population Scenarios
+# Section 3, Population Scenarios
 # ---------------------------------------------------------------------------
 
 
@@ -304,17 +305,17 @@ On the **medium path** (+350K pa), doubling takes **75 years**. On the **low tra
 
 > *"The children alive today will see Australia at 56 million people. And we are
 > planning for this right now."*
-> — Simon Kuestenmacher
+>, Simon Kuestenmacher
             """
         )
         _planning_callout(
-            "The direction is certain — only the pace differs. Earmark the Eastern Seaboard "
+            "The direction is certain, only the pace differs. Earmark the Eastern Seaboard "
             "fast-rail corridor now. You can't build it yet, but the mistake is not planning for it."
         )
 
 
 # ---------------------------------------------------------------------------
-# Section 4 — Workforce U-Shape
+# Section 4, Workforce U-Shape
 # ---------------------------------------------------------------------------
 
 
@@ -331,7 +332,7 @@ def render_section_4() -> None:
 
     with col_story:
         _story_col_header(
-            "Australia transformed into a knowledge economy — but the middle class vanished"
+            "Australia transformed into a knowledge economy, but the middle class vanished"
         )
         st.markdown(
             """
@@ -344,12 +345,12 @@ economy anchoring the top and automation and casual work anchoring the base.
 
 > *"This is the opposite of a bell curve. This is the letter U. The middle class is
 > small and shrinking, ever less important."*
-> — Simon Kuestenmacher
+>, Simon Kuestenmacher
             """
         )
         _planning_callout(
             "Rich and poor are geographically segregating. Equitable built environments "
-            "must be designed intentionally — they will not emerge from the market."
+            "must be designed intentionally, they will not emerge from the market."
         )
         st.caption("Sources:")
         c1, c2, _ = st.columns([1, 1, 4])
@@ -360,7 +361,7 @@ economy anchoring the top and automation and casual work anchoring the base.
 
 
 # ---------------------------------------------------------------------------
-# Section 5 — Aged Care Cliff
+# Section 5, Aged Care Cliff
 # ---------------------------------------------------------------------------
 
 
@@ -376,23 +377,23 @@ def render_section_5() -> None:
         )
 
     with col_story:
-        _story_col_header("The aged care cliff — no chance in hell")
+        _story_col_header("The aged care cliff, no chance in hell")
         st.markdown(
             """
 Australia's 85+ population will grow from **600,000** in 2020 to **1.2 million** by
-2040 — more than doubling in 20 years [¹]. Daily care demand will reach **648,000**.
+2040, more than doubling in 20 years [¹]. Daily care demand will reach **648,000**.
 The system can realistically supply around **360,000** places.
 
 The gap: **~290,000 unmet care needs** by 2040.
 
-> *"We are doubling the 85+ cohort in 14 years. We're not importing old people —
+> *"We are doubling the 85+ cohort in 14 years. We're not importing old people,
 > they're already here. Will we double the aged care system? Spoiler: no chance in hell."*
-> — Simon Kuestenmacher
+>, Simon Kuestenmacher
             """
         )
         _planning_callout(
             "Car-dependent communities accelerate mental and physical decline in older residents. "
-            "Walkable, mixed-use communities let people age in place independently for longer — "
+            "Walkable, mixed-use communities let people age in place independently for longer, "
             "reducing pressure on formal care systems."
         )
         st.caption("Sources:")
@@ -404,7 +405,7 @@ The gap: **~290,000 unmet care needs** by 2040.
 
 
 # ---------------------------------------------------------------------------
-# Section 6 — Sprawl vs Density
+# Section 6, Sprawl vs Density
 # ---------------------------------------------------------------------------
 
 
@@ -424,14 +425,14 @@ def render_section_6() -> None:
         st.markdown(
             """
 A 3-bedroom house on the suburban fringe costs **$1,981–$2,351/sqm** to build.
-A unit in a mid-to-high-rise complex with basement parking costs **$3,934–$4,397/sqm** —
+A unit in a mid-to-high-rise complex with basement parking costs **$3,934–$4,397/sqm**,
 roughly **double**. As long as this cost gap persists, market forces will keep driving
 urban sprawl regardless of planning policy or political will.
 
 > *"All the planning efforts are very much pushing against this hard-core reality of
 > building costs. As long as we don't shift the financial model, the wonderful attempts
 > to slow down urban sprawl are probably not going to work."*
-> — Simon Kuestenmacher
+>, Simon Kuestenmacher
             """
         )
         _planning_callout(
@@ -442,7 +443,7 @@ urban sprawl regardless of planning policy or political will.
 
 
 # ---------------------------------------------------------------------------
-# Section 7 — Economic Complexity
+# Section 7, Economic Complexity
 # ---------------------------------------------------------------------------
 
 
@@ -459,11 +460,11 @@ def render_section_7() -> None:
 
     with col_story:
         _story_col_header(
-            "Australia ranks 89th in Economic Complexity — and it doesn't matter (yet)"
+            "Australia ranks 89th in Economic Complexity, and it doesn't matter (yet)"
         )
         st.markdown(
             """
-Australia's **ECI rank is 89** out of 166 countries — despite a GDP per capita of
+Australia's **ECI rank is 89** out of 166 countries, despite a GDP per capita of
 **USD 65,400** [¹]. Australia's ECI score crossed from positive into negative territory
 around 2005–06, driven by the commodities boom shifting exports away from manufactures.
 Chinese Taipei leads the world at rank 1, followed by Japan and Switzerland.
@@ -474,13 +475,13 @@ revenue equitably across the population. This is **not a permanent advantage**.
 > *"The only reason we are rich is that we have strong institutions distributing
 > mining wealth equitably. Anything that weakens those institutions is absolutely
 > dangerous."*
-> — Simon Kuestenmacher
+>, Simon Kuestenmacher
             """
         )
         _planning_callout(
             "If Australia loses institutional quality or commodity prices fall, its rank-89 "
             "complexity offers no buffer. Diversification through the knowledge economy is not "
-            "optional — it is a long-run survival question."
+            "optional, it is a long-run survival question."
         )
         st.caption("Sources:")
         c1, c2, _ = st.columns([1, 1, 4])

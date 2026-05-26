@@ -1,4 +1,4 @@
-"""Timeline tab — plots demographic metric trends from baked-in corpus metadata.
+"""Timeline tab, plots demographic metric trends from baked-in corpus metadata.
 
 No LLM call required: metric_years and metric_values are stored directly in each
 document's metadata, enabling instant, reliable trend visualisation.
@@ -9,6 +9,8 @@ from __future__ import annotations
 import plotly.graph_objects as go
 import streamlit as st
 from langchain_core.documents import Document
+
+from palette import COUNTRY_COLORS, GOLD, ORANGE, RED, TEXT_BODY_ALT
 
 _COUNTRY_ISO = {
     "Australia": "AUS", "Japan": "JPN", "South Korea": "KOR",
@@ -34,11 +36,6 @@ _TOPIC_LABELS = {
     "economic_complexity": "Economic Complexity (ECI)",
 }
 
-_COUNTRY_COLORS = [
-    "#4A90E2", "#E74C3C", "#2ECC71", "#F39C12", "#9B59B6",
-    "#1ABC9C", "#E67E22", "#34495E", "#E91E63", "#00BCD4",
-    "#FF5722", "#8BC34A", "#795548", "#607D8B", "#FF9800",
-]
 
 
 def _get_countries_for_topic(docs: list[Document], topic: str) -> list[str]:
@@ -94,7 +91,7 @@ def _render_choropleth(docs: list[Document], topic: str) -> None:
         hovertemplate="<b>%{text}</b><br>" + metric_label + ": %{z}<extra></extra>",
     ))
     fig.update_layout(
-        title=f"{_TOPIC_LABELS[topic]} — Latest values by country",
+        title=f"{_TOPIC_LABELS[topic]}, Latest values by country",
         geo=dict(
             showframe=False,
             showcoastlines=True,
@@ -104,7 +101,7 @@ def _render_choropleth(docs: list[Document], topic: str) -> None:
         ),
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#e0e0e0"),
+        font=dict(color=TEXT_BODY_ALT),
         margin=dict(l=0, r=0, t=40, b=0),
     )
     st.plotly_chart(fig, use_container_width=True)
@@ -113,7 +110,7 @@ def _render_choropleth(docs: list[Document], topic: str) -> None:
 
 def _render_cross_domain(docs: list[Document]) -> None:
     """Dual-axis chart: ECI on left, any demographic indicator on right."""
-    st.markdown("#### Cross-Domain Explorer — Economic Complexity vs Demographic Indicator")
+    st.markdown("#### Cross-Domain Explorer, Economic Complexity vs Demographic Indicator")
     st.caption(
         "Simon's key insight: Australia ranks #105 in Economic Complexity despite high GDP per capita. "
         "Explore how ECI correlates with demographic indicators across OECD peers."
@@ -170,7 +167,7 @@ def _render_cross_domain(docs: list[Document]) -> None:
     fig = go.Figure()
     demo_label = ""
     for i, country in enumerate(selected_countries):
-        color = _COUNTRY_COLORS[i % len(_COUNTRY_COLORS)]
+        color = COUNTRY_COLORS[i % len(COUNTRY_COLORS)]
         if country in eci_docs:
             e = eci_docs[country].metadata
             fig.add_trace(go.Scatter(
@@ -198,21 +195,21 @@ def _render_cross_domain(docs: list[Document]) -> None:
         fig.add_annotation(
             x=e["metric_years"][latest_idx], y=e["metric_values"][latest_idx],
             text="AU (rank 105)", showarrow=True, arrowhead=2,
-            ax=-50, ay=-30, font=dict(color="#E74C3C", size=10), arrowcolor="#E74C3C",
+            ax=-50, ay=-30, font=dict(color=RED, size=10), arrowcolor=RED,
         )
 
     fig.update_layout(
         title=f"Economic Complexity (ECI) vs {demo_topics[selected_demo]}",
         xaxis=dict(title="Year", showgrid=True, gridcolor="rgba(255,255,255,0.08)"),
         yaxis=dict(title="ECI Score", showgrid=True, gridcolor="rgba(255,255,255,0.08)",
-                   color="#00D4FF"),
+                   color=GOLD),
         yaxis2=dict(title=demo_label, overlaying="y", side="right",
-                    showgrid=False, color="#F39C12"),
+                    showgrid=False, color=ORANGE),
         legend=dict(orientation="h", y=1.05),
         barmode="group",
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#e0e0e0"),
+        font=dict(color=TEXT_BODY_ALT),
     )
     st.plotly_chart(fig, use_container_width=True)
     st.caption("Lines = ECI score (left axis) · Bars = demographic indicator (right axis)")
@@ -220,7 +217,7 @@ def _render_cross_domain(docs: list[Document]) -> None:
 
 def render_timeline_tab(docs: list[Document]) -> None:
     st.header("Trend Timeline")
-    st.caption("Explore how demographic indicators have shifted over time across countries. Data is read directly from source metadata — no AI generation.")
+    st.caption("Explore how demographic indicators have shifted over time across countries. Data is read directly from source metadata, no AI generation.")
 
     view_mode = st.radio(
         "View mode",
@@ -252,7 +249,7 @@ def render_timeline_tab(docs: list[Document]) -> None:
             options=available_countries,
             default=available_countries[:3],
             disabled=(view_mode == "Choropleth map"),
-            help="Country selection is not used in map view — all countries are shown.",
+            help="Country selection is not used in map view, all countries are shown.",
         )
 
     with col2:
@@ -283,7 +280,7 @@ def render_timeline_tab(docs: list[Document]) -> None:
             years = meta["metric_years"]
             values = meta["metric_values"]
             country = meta["country"]
-            color = _COUNTRY_COLORS[i % len(_COUNTRY_COLORS)]
+            color = COUNTRY_COLORS[i % len(COUNTRY_COLORS)]
 
             fig.add_trace(go.Scatter(
                 x=years,
@@ -296,13 +293,13 @@ def render_timeline_tab(docs: list[Document]) -> None:
             ))
 
         fig.update_layout(
-            title=f"{_TOPIC_LABELS[selected_topic]} — {metric_label}",
+            title=f"{_TOPIC_LABELS[selected_topic]}, {metric_label}",
             xaxis_title="Year",
             yaxis_title=metric_label,
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
             plot_bgcolor="rgba(0,0,0,0)",
             paper_bgcolor="rgba(0,0,0,0)",
-            font=dict(color="#e0e0e0"),
+            font=dict(color=TEXT_BODY_ALT),
             hovermode="x unified",
         )
         fig.update_xaxes(showgrid=True, gridcolor="rgba(255,255,255,0.1)")
@@ -313,4 +310,4 @@ def render_timeline_tab(docs: list[Document]) -> None:
         st.markdown("**Sources**")
         for doc in matched:
             meta = doc.metadata
-            st.caption(f"- {meta.get('source_org')} — *{meta.get('publication')}* ({meta.get('year')})")
+            st.caption(f"- {meta.get('source_org')}, *{meta.get('publication')}* ({meta.get('year')})")

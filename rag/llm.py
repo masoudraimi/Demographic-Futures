@@ -3,7 +3,7 @@ from langchain_openai import ChatOpenAI
 
 
 def get_llm(
-    model: str = "google/gemini-flash-1.5",
+    model: str = "google/gemini-2.5-flash",
     streaming: bool = False,
     temperature: float = 0.2,
 ) -> ChatOpenAI:

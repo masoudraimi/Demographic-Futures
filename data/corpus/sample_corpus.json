@@ -1094,7 +1094,7 @@
   {
     "id": "life_gbr_040",
     "title": "United Kingdom: Life Expectancy Stagnation Post-2010",
-    "content": "UK life expectancy was 80.7 years in 2022, having stagnated since 2011 — an anomaly among wealthy nations. Austerity-related cuts to social services, rising obesity, and NHS pressures are cited as drivers. COVID-19 caused a 1.3-year drop in 2020. England shows wider inequalities than Scotland or Wales.",
+    "content": "UK life expectancy was 80.7 years in 2022, having stagnated since 2011, an anomaly among wealthy nations. Austerity-related cuts to social services, rising obesity, and NHS pressures are cited as drivers. COVID-19 caused a 1.3-year drop in 2020. England shows wider inequalities than Scotland or Wales.",
     "year": 2022,
     "country": "United Kingdom",
     "region": "Western Europe",
@@ -1122,7 +1122,7 @@
   {
     "id": "work_aus_041",
     "title": "Australia: Labour Force Participation of Workers Aged 55-74 2000-2022",
-    "content": "Australia's labour force participation rate among workers aged 55-74 rose from 34% in 2000 to 53% in 2022, driven by superannuation incentives delaying retirement, improved health, and rising pension age. Note: ABS 6291.0.55.001 (Table 01) reports the 55-64 band specifically — this narrower band ran 48.2% in 2000 and 68.9% in 2022 (annual average); the broader 55-74 composite reported here is lower due to the much lower participation rate of 65-74 year olds. The 55-74 composite cannot be verified — it is published in ABS 6202.0 Table 22 (\"Participation rates and employment to population ratios by Age and Sex\"), which was not among the supplied files. The gap between male and female participation has narrowed significantly. Mature-age workers are increasingly in part-time roles.",
+    "content": "Australia's labour force participation rate among workers aged 55-74 rose from 34% in 2000 to 53% in 2022, driven by superannuation incentives delaying retirement, improved health, and rising pension age. Note: ABS 6291.0.55.001 (Table 01) reports the 55-64 band specifically, this narrower band ran 48.2% in 2000 and 68.9% in 2022 (annual average); the broader 55-74 composite reported here is lower due to the much lower participation rate of 65-74 year olds. The 55-74 composite cannot be verified, it is published in ABS 6202.0 Table 22 (\"Participation rates and employment to population ratios by Age and Sex\"), which was not among the supplied files. The gap between male and female participation has narrowed significantly. Mature-age workers are increasingly in part-time roles.",
     "year": 2022,
     "country": "Australia",
     "region": "Oceania",
@@ -1514,7 +1514,7 @@
   {
     "id": "dep_kor_055",
     "title": "South Korea: Fastest Rising Dependency Ratio in OECD 2000-2060",
-    "content": "South Korea's old-age dependency ratio was 25 in 2022 and is projected to reach 97 by 2060 — nearly one retiree per worker. This projection, combined with a TFR below 1.0, presents one of the most acute demographic-fiscal challenges globally. The National Pension Service faces potential insolvency by 2057 without reform.",
+    "content": "South Korea's old-age dependency ratio was 25 in 2022 and is projected to reach 97 by 2060, nearly one retiree per worker. This projection, combined with a TFR below 1.0, presents one of the most acute demographic-fiscal challenges globally. The National Pension Service faces potential insolvency by 2057 without reform.",
     "year": 2022,
     "country": "South Korea",
     "region": "East Asia",
@@ -1542,7 +1542,7 @@
   {
     "id": "dep_fra_056",
     "title": "France: Moderate Dependency Growth with Pension Reform 2000-2060",
-    "content": "France's old-age dependency ratio was 35 in 2022 and is projected to reach 52 by 2060 — moderate by EU standards. The 2023 pension reform raising the retirement age from 62 to 64 was specifically designed to limit growth in the dependency ratio. France's higher fertility moderates the long-term trajectory.",
+    "content": "France's old-age dependency ratio was 35 in 2022 and is projected to reach 52 by 2060, moderate by EU standards. The 2023 pension reform raising the retirement age from 62 to 64 was specifically designed to limit growth in the dependency ratio. France's higher fertility moderates the long-term trajectory.",
     "year": 2022,
     "country": "France",
     "region": "Western Europe",
@@ -1906,7 +1906,7 @@
   {
     "id": "proj_chn_069",
     "title": "China: Population Peak and Coming Decline 2020-2100",
-    "content": "China's population peaked at 1.412 billion in 2021 and began declining in 2022 — decades earlier than official projections. UN medium projections see China falling to 1.3 billion by 2050 and below 800 million by 2100. The end of the one-child policy has not reversed fertility trends; TFR remains near 1.1.",
+    "content": "China's population peaked at 1.412 billion in 2021 and began declining in 2022, decades earlier than official projections. UN medium projections see China falling to 1.3 billion by 2050 and below 800 million by 2100. The end of the one-child policy has not reversed fertility trends; TFR remains near 1.1.",
     "year": 2023,
     "country": "China",
     "region": "East Asia",
@@ -1934,7 +1934,7 @@
   {
     "id": "proj_ind_070",
     "title": "India: Becoming World's Most Populous Nation 2023-2100",
-    "content": "India surpassed China as the world's most populous country in April 2023 with 1.429 billion people. India's population is projected to peak near 1.7 billion around 2060 before declining. India's demographic dividend — a large working-age population — offers growth potential if employment and education challenges are addressed.",
+    "content": "India surpassed China as the world's most populous country in April 2023 with 1.429 billion people. India's population is projected to peak near 1.7 billion around 2060 before declining. India's demographic dividend, a large working-age population, offers growth potential if employment and education challenges are addressed.",
     "year": 2023,
     "country": "India",
     "region": "South Asia",
@@ -2382,7 +2382,7 @@
   {
     "id": "health_gbr_086",
     "title": "United Kingdom: NHS Pressures from Aging Population 2000-2022",
-    "content": "UK healthcare spending was 12.0% of GDP in 2022, up from 6.6% in 2000. NHS demand from an aging population has grown faster than funding. Record 7.7 million people were on NHS waiting lists in 2023. Social care underfunding — a separate system from NHS — is increasingly described as a demographic policy failure.",
+    "content": "UK healthcare spending was 12.0% of GDP in 2022, up from 6.6% in 2000. NHS demand from an aging population has grown faster than funding. Record 7.7 million people were on NHS waiting lists in 2023. Social care underfunding, a separate system from NHS, is increasingly described as a demographic policy failure.",
     "year": 2022,
     "country": "United Kingdom",
     "region": "Western Europe",
@@ -2662,7 +2662,7 @@
   {
     "id": "pens_gbr_096",
     "title": "United Kingdom: Auto-Enrolment and State Pension Reform 2000-2022",
-    "content": "The UK's auto-enrolment policy (introduced 2012) enrolled 10.7 million workers in workplace pensions by 2022. The New State Pension (2016) simplified the system but created winners and losers based on contribution history. The triple lock — linking state pension increases to the higher of inflation, earnings, or 2.5% — is fiscally expensive in an inflationary environment.",
+    "content": "The UK's auto-enrolment policy (introduced 2012) enrolled 10.7 million workers in workplace pensions by 2022. The New State Pension (2016) simplified the system but created winners and losers based on contribution history. The triple lock, linking state pension increases to the higher of inflation, earnings, or 2.5%, is fiscally expensive in an inflationary environment.",
     "year": 2022,
     "country": "United Kingdom",
     "region": "Western Europe",
@@ -2825,12 +2825,12 @@
       37.0,
       39.9
     ],
-    "metric_label": "Projected Population — Series B (millions)"
+    "metric_label": "Projected Population, Series B (millions)"
   },
   {
     "id": "aging_aus_102",
     "title": "Australia: Population Aged 85+ Projection 2020-2040",
-    "content": "Australia's population aged 85 and over will double from approximately 600,000 in 2020 to 1.2 million by 2040, driven by baby boomers entering extreme old age. Over 54% of this cohort requires daily care or support. The aged care system currently serves around 230,000 residential aged care places — a supply that cannot scale to match demand by 2040 without transformative structural change. Demographer Simon Kuestenmacher described this as 'no chance in hell' of being achieved under current planning approaches. The doubling creates the largest structural challenge in Australian social policy.",
+    "content": "Australia's population aged 85 and over will double from approximately 600,000 in 2020 to 1.2 million by 2040, driven by baby boomers entering extreme old age. Over 54% of this cohort requires daily care or support. The aged care system currently serves around 230,000 residential aged care places, a supply that cannot scale to match demand by 2040 without transformative structural change. Demographer Simon Kuestenmacher described this as 'no chance in hell' of being achieved under current planning approaches. The doubling creates the largest structural challenge in Australian social policy.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -2856,7 +2856,7 @@
   {
     "id": "healthcare_aus_103",
     "title": "Australia: Aged Care Demand Gap 2020-2040",
-    "content": "Australia's aged care sector faces a structural supply-demand gap that will peak in the 2030s. With 54% of the 85+ population requiring daily care or support, demand is projected to rise from 324,000 in 2020 to 648,000 by 2040. The residential aged care sector provides approximately 230,000 places, with additional home care packages numbering around 90,000. Doubling care supply within 14 years — under workforce shortages, construction costs, and regulatory burdens — is structurally implausible without a fundamental redesign of the aged care model, including more community-embedded aging in place and accessible urban design for car-free mobility.",
+    "content": "Australia's aged care sector faces a structural supply-demand gap that will peak in the 2030s. With 54% of the 85+ population requiring daily care or support, demand is projected to rise from 324,000 in 2020 to 648,000 by 2040. The residential aged care sector provides approximately 230,000 places, with additional home care packages numbering around 90,000. Doubling care supply within 14 years, under workforce shortages, construction costs, and regulatory burdens, is structurally implausible without a fundamental redesign of the aged care model, including more community-embedded aging in place and accessible urban design for car-free mobility.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -2881,8 +2881,8 @@
   },
   {
     "id": "fertility_aus_104",
-    "title": "Australia: TFR Scenarios 2022-2036 — Treasury vs Independent Projections",
-    "content": "Australia's total fertility rate fell to 1.65 in 2022 (ABS Births 2024), continuing a long-run decline. The Centre for Population (Treasury) projects a gradual recovery to 1.62 by 2036 (Series B), assuming economic stability and improving housing affordability. Independent demographer Simon Kuestenmacher disputes this, projecting stagnation around 1.42 or further decline toward 1.3 — which he calls 'the Melbourne model', reflecting global trends in highly urbanised, high-cost cities. South Korea's experience (TFR 0.78) demonstrates that sub-replacement fertility can worsen dramatically even with pro-natalist policies. Australia's population growth will be driven by migration regardless of which TFR scenario materialises.",
+    "title": "Australia: TFR Scenarios 2022-2036, Treasury vs Independent Projections",
+    "content": "Australia's total fertility rate fell to 1.65 in 2022 (ABS Births 2024), continuing a long-run decline. The Centre for Population (Treasury) projects a gradual recovery to 1.62 by 2036 (Series B), assuming economic stability and improving housing affordability. Independent demographer Simon Kuestenmacher disputes this, projecting stagnation around 1.42 or further decline toward 1.3, which he calls 'the Melbourne model', reflecting global trends in highly urbanised, high-cost cities. South Korea's experience (TFR 0.78) demonstrates that sub-replacement fertility can worsen dramatically even with pro-natalist policies. Australia's population growth will be driven by migration regardless of which TFR scenario materialises.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -2909,12 +2909,12 @@
       1.6,
       1.62
     ],
-    "metric_label": "Total Fertility Rate — 2022 actual (ABS Births 2024); 2024–2036 are Treasury Series B projections"
+    "metric_label": "Total Fertility Rate, 2022 actual (ABS Births 2024); 2024–2036 are Treasury Series B projections"
   },
   {
     "id": "migr_aus_105",
     "title": "Australia: Migration Composition by Visa Class 2006-2023",
-    "content": "Australia's net overseas migration reached a record 518,000 in 2022-23 (ABS Cat. 3412.0 headline series; the alternative Cat. 3407.0 methodology reports 538,340 for the same year), but the composition is more complex than headline numbers suggest. In 2022-23, the post-COVID student catch-up dominated: international students accounted for 48.7% of NOM (262,270 out of 538,340 on the 3407.0 basis), not the historical ~40%. Skilled migrants (employer-sponsored and points-tested combined) contributed approximately 13.8% of NOM (74,160: skilled permanent 30,540 + skilled temporary 43,620) — well below the long-run structural share; pre-COVID 2018-19 skilled share was ~20%. Family-stream NOM was 15,490 (2.9% of 2022-23 NOM), sharply lower than structural norms due to the student surge. Humanitarian NOM was 12,850 (2.4% of NOM; 21% of permanent-visa NOM of 60,250). Working holiday and visitor NOM together contributed 29.9% (160,660). International students turn sharply negative in border-closure years. Skilled migrants contribute a net +$330,000 in lifetime fiscal value; students and temporary workers have varied fiscal impacts.",
+    "content": "Australia's net overseas migration reached a record 518,000 in 2022-23 (ABS Cat. 3412.0 headline series; the alternative Cat. 3407.0 methodology reports 538,340 for the same year), but the composition is more complex than headline numbers suggest. In 2022-23, the post-COVID student catch-up dominated: international students accounted for 48.7% of NOM (262,270 out of 538,340 on the 3407.0 basis), not the historical ~40%. Skilled migrants (employer-sponsored and points-tested combined) contributed approximately 13.8% of NOM (74,160: skilled permanent 30,540 + skilled temporary 43,620), well below the long-run structural share; pre-COVID 2018-19 skilled share was ~20%. Family-stream NOM was 15,490 (2.9% of 2022-23 NOM), sharply lower than structural norms due to the student surge. Humanitarian NOM was 12,850 (2.4% of NOM; 21% of permanent-visa NOM of 60,250). Working holiday and visitor NOM together contributed 29.9% (160,660). International students turn sharply negative in border-closure years. Skilled migrants contribute a net +$330,000 in lifetime fiscal value; students and temporary workers have varied fiscal impacts.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -2941,8 +2941,8 @@
   },
   {
     "id": "workforce_aus_106",
-    "title": "Australia: The U-Shaped Workforce — Skill Level Distribution 1986-2036",
-    "content": "Australia's workforce has transformed from a bell curve skill distribution to a U-shape over four decades. Jobs requiring a university degree (ABS Skill Level 1: doctors, engineers, lawyers) now account for over one third of all roles, up from 16% in 1986. By contrast, TAFE-level jobs (Skill Level 3: trades, manufacturing, technicians) — once the backbone of the middle class — have declined to 15% and continue shrinking. Combined Skill Level 4 and 5 roles (limited formal qualification) make up 48% of jobs. Automation is accelerating the hollowing out of the middle. The implications for geographic segregation, housing affordability, and social cohesion are severe. TAFE-level workers face a structural ceiling on housing affordability in major cities.",
+    "title": "Australia: The U-Shaped Workforce, Skill Level Distribution 1986-2036",
+    "content": "Australia's workforce has transformed from a bell curve skill distribution to a U-shape over four decades. Jobs requiring a university degree (ABS Skill Level 1: doctors, engineers, lawyers) now account for over one third of all roles, up from 16% in 1986. By contrast, TAFE-level jobs (Skill Level 3: trades, manufacturing, technicians), once the backbone of the middle class, have declined to 15% and continue shrinking. Combined Skill Level 4 and 5 roles (limited formal qualification) make up 48% of jobs. Automation is accelerating the hollowing out of the middle. The implications for geographic segregation, housing affordability, and social cohesion are severe. TAFE-level workers face a structural ceiling on housing affordability in major cities.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -2963,11 +2963,11 @@
       33,
       37
     ],
-    "metric_label": "University-Qualified Jobs (% of workforce — Skill Level 1)"
+    "metric_label": "University-Qualified Jobs (% of workforce, Skill Level 1)"
   },
   {
     "id": "workforce_aus_107",
-    "title": "Australia: Fiscal Contribution — Skilled Migrants vs Australian-Born 2023",
+    "title": "Australia: Fiscal Contribution, Skilled Migrants vs Australian-Born 2023",
     "content": "Analysis from the Australian Government's Intergenerational Report 2023 shows that an Australian-born person generates a net lifetime fiscal cost of approximately -$120,000 (taxes paid minus government services received over a lifetime). A skilled migrant, by contrast, contributes a net +$330,000 over their lifetime, reflecting that they arrive educated, in prime working age (18-39), contribute income tax for decades, and tend to access less publicly-funded education in childhood. This $450,000 per-person fiscal difference is the single strongest economic argument for skilled migration. Approximately 69% of foreign-born residents pay income tax. The Australian government budget relies on income tax for over 50% of revenue, making the age and skill composition of migration critical to fiscal sustainability.",
     "year": 2023,
     "country": "Australia",
@@ -2982,7 +2982,7 @@
   {
     "id": "pop_proj_aus_108",
     "title": "Australia: 44-Year-Old Peak Spending Cohort 2022-2036",
-    "content": "The fastest-growing single year of age in Australia through 2036 is 44-year-olds — the peak lifetime spending cohort. This cohort drives high consumption of housing upgrades, vehicles, education, and services, creating sustained inflationary pressure that will keep interest rates elevated longer than macroeconomic models typically predict. This demographic tailwind benefits aggregate consumer spending but squeezes asset-poor households at the bottom of the income distribution who bear the brunt of higher borrowing costs. The 44-year-old bulge represents the peak of the baby boomer echo — millennials born in the late 1970s and early 1980s — now entering their peak earning and spending years.",
+    "content": "The fastest-growing single year of age in Australia through 2036 is 44-year-olds, the peak lifetime spending cohort. This cohort drives high consumption of housing upgrades, vehicles, education, and services, creating sustained inflationary pressure that will keep interest rates elevated longer than macroeconomic models typically predict. This demographic tailwind benefits aggregate consumer spending but squeezes asset-poor households at the bottom of the income distribution who bear the brunt of higher borrowing costs. The 44-year-old bulge represents the peak of the baby boomer echo, millennials born in the late 1970s and early 1980s, now entering their peak earning and spending years.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -3014,7 +3014,7 @@
   {
     "id": "dep_ratio_cross_109",
     "title": "Old-Age Dependency Ratio Cross-Country Projections 2020-2060",
-    "content": "Old-age dependency ratios — the number of people aged 65+ per 100 working-age people aged 20-64 — are projected to rise sharply across OECD countries through 2060. South Korea faces the most extreme trajectory, rising from 23 in 2020 to 97 by 2060, meaning near-parity between retirees and workers. Japan projects a ratio of 80 by 2060. Germany and Italy project ratios exceeding 60. Australia, buffered by continued migration, projects a more moderate rise from 25 in 2020 to 45 by 2060. These ratios directly constrain pension replacement rates, healthcare budgets, and fiscal headroom for government investment.",
+    "content": "Old-age dependency ratios, the number of people aged 65+ per 100 working-age people aged 20-64, are projected to rise sharply across OECD countries through 2060. South Korea faces the most extreme trajectory, rising from 23 in 2020 to 97 by 2060, meaning near-parity between retirees and workers. Japan projects a ratio of 80 by 2060. Germany and Italy project ratios exceeding 60. Australia, buffered by continued migration, projects a more moderate rise from 25 in 2020 to 45 by 2060. These ratios directly constrain pension replacement rates, healthcare budgets, and fiscal headroom for government investment.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -3035,7 +3035,7 @@
       41,
       45
     ],
-    "metric_label": "Old-Age Dependency Ratio — Australia (65+ per 100 working-age)"
+    "metric_label": "Old-Age Dependency Ratio, Australia (65+ per 100 working-age)"
   },
   {
     "id": "social_cohesion_aus_110",
@@ -3054,7 +3054,7 @@
   {
     "id": "healthcare_aus_111",
     "title": "Australia: Car Dependence, Aging, and Mental Health",
-    "content": "Australia's suburban form — characterised by low-density car-dependent development on the urban fringe — creates a compound risk for the aging 85+ cohort. When older residents lose the ability to drive, car-dependent communities immediately deprive them of access to groceries, medical services, social contact, and community participation. Demographer Simon Kuestenmacher has described car-dependent communities in old age as 'absolute mental health poison', noting the sharp deterioration in wellbeing that follows driving cessation in suburbs with no walkable services or public transport. Planning for aging-in-place requires a fundamental rethink of suburban street design, mixed-use land use, and public transport density in outer suburbs — infrastructure decisions that take 30-40 years to change.",
+    "content": "Australia's suburban form, characterised by low-density car-dependent development on the urban fringe, creates a compound risk for the aging 85+ cohort. When older residents lose the ability to drive, car-dependent communities immediately deprive them of access to groceries, medical services, social contact, and community participation. Demographer Simon Kuestenmacher has described car-dependent communities in old age as 'absolute mental health poison', noting the sharp deterioration in wellbeing that follows driving cessation in suburbs with no walkable services or public transport. Planning for aging-in-place requires a fundamental rethink of suburban street design, mixed-use land use, and public transport density in outer suburbs, infrastructure decisions that take 30-40 years to change.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -3068,7 +3068,7 @@
   {
     "id": "pension_aus_112",
     "title": "Australia: Economic Complexity and Fiscal Vulnerability",
-    "content": "Australia ranks 105th out of 133 countries on the Harvard Growth Lab's Economic Complexity Index, placing it below Botswana and Ivory Coast despite its high GDP per capita. Australia's economic output is heavily concentrated in mining, agriculture, tourism, and education — sectors that are resource-intensive but low in manufactured complexity. Germany, by contrast, ranks approximately 4th, reflecting deep industrial and technological diversification. Australia's low complexity reflects a 'resources curse' risk: high per-capita income without the industrial sophistication that sustains wealth when resources decline. The long-run energy transition (60 more years of global population growth demand, 100 more years of urbanisation demand remaining) provides continued mining wealth, but economic diversification is the strategic imperative.",
+    "content": "Australia ranks 105th out of 133 countries on the Harvard Growth Lab's Economic Complexity Index, placing it below Botswana and Ivory Coast despite its high GDP per capita. Australia's economic output is heavily concentrated in mining, agriculture, tourism, and education, sectors that are resource-intensive but low in manufactured complexity. Germany, by contrast, ranks approximately 4th, reflecting deep industrial and technological diversification. Australia's low complexity reflects a 'resources curse' risk: high per-capita income without the industrial sophistication that sustains wealth when resources decline. The long-run energy transition (60 more years of global population growth demand, 100 more years of urbanisation demand remaining) provides continued mining wealth, but economic diversification is the strategic imperative.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -3082,7 +3082,7 @@
   {
     "id": "pension_nor_113",
     "title": "Norway: Sovereign Wealth Fund Model for Resource Economy Transition",
-    "content": "Norway's Government Pension Fund Global — the world's largest sovereign wealth fund at over USD 1.7 trillion in 2023 — was built by capturing petroleum revenues rather than spending them on current budgets. The fund's returns are used to fund a portion of Norway's annual budget, smoothing the transition as oil revenues eventually decline. Demographer Simon Kuestenmacher argues Australia should adopt an analogous model: continue extracting coal and LNG (which remain 60+ years from demand exhaustion), capture the wealth in a sovereign fund, and use the returns to fund the transition to net zero. Stopping exports unilaterally simply raises global prices and makes dirtier producers viable, achieving worse environmental outcomes at higher economic cost to Australia.",
+    "content": "Norway's Government Pension Fund Global, the world's largest sovereign wealth fund at over USD 1.7 trillion in 2023, was built by capturing petroleum revenues rather than spending them on current budgets. The fund's returns are used to fund a portion of Norway's annual budget, smoothing the transition as oil revenues eventually decline. Demographer Simon Kuestenmacher argues Australia should adopt an analogous model: continue extracting coal and LNG (which remain 60+ years from demand exhaustion), capture the wealth in a sovereign fund, and use the returns to fund the transition to net zero. Stopping exports unilaterally simply raises global prices and makes dirtier producers viable, achieving worse environmental outcomes at higher economic cost to Australia.",
     "year": 2023,
     "country": "Norway",
     "region": "Northern Europe",
@@ -3109,8 +3109,8 @@
   },
   {
     "id": "pop_proj_aus_114",
-    "title": "Australia: 80-Year Planning Horizon — The Path to 56 Million",
-    "content": "Australia grew from 7 million in 1945 to 28 million in 2025 — a fourfold increase over 80 years that was largely unplanned. Demographer Simon Kuestenmacher projects Australia will double again from 28 million to 56 million within the lifetimes of children alive today, based on current migration trajectories and modest natural increase. The median doubling time is estimated at 25 years (high scenario) to 80 years (Simon's best estimate). This growth will be concentrated on the Eastern Seaboard — Melbourne, Sydney, Brisbane corridor — and will require infrastructure planning at a scale that Australia has never attempted. The key lesson from the 1945-2025 growth period is that failure to earmark infrastructure corridors (rail, sewage, roads) in advance creates exponentially costly retrofitting problems — 'the level crossings of the next generation'.",
+    "title": "Australia: 80-Year Planning Horizon, The Path to 56 Million",
+    "content": "Australia grew from 7 million in 1945 to 28 million in 2025, a fourfold increase over 80 years that was largely unplanned. Demographer Simon Kuestenmacher projects Australia will double again from 28 million to 56 million within the lifetimes of children alive today, based on current migration trajectories and modest natural increase. The median doubling time is estimated at 25 years (high scenario) to 80 years (Simon's best estimate). This growth will be concentrated on the Eastern Seaboard, Melbourne, Sydney, Brisbane corridor, and will require infrastructure planning at a scale that Australia has never attempted. The key lesson from the 1945-2025 growth period is that failure to earmark infrastructure corridors (rail, sewage, roads) in advance creates exponentially costly retrofitting problems, 'the level crossings of the next generation'.",
     "year": 2023,
     "country": "Australia",
     "region": "Oceania",
@@ -3137,8 +3137,8 @@
   },
   {
     "id": "pop_proj_aus_115",
-    "title": "Australia: Population Pyramid 2022 — Baby Boomer Bulge and Youth Base",
-    "content": "Australia's 2022 population pyramid shows a distinctive shape: a wide bulge in the 30-49 age bands (millennials and late Gen X, amplified by working-age migration), narrowing at the base (fewer children from sub-replacement fertility), and a growing top (expanding 65+ population). The 85+ cohort is 530,000 — small but set to double. By 2036, the 60-74 band will expand dramatically as the 1961-1975 baby boom cohort enters late retirement. The 2036 pyramid will show a pronounced top-heaviness never before seen in Australia's demographic history. This structural shift underpins the aged care, pension, and healthcare fiscal pressures through the 2030s.",
+    "title": "Australia: Population Pyramid 2022, Baby Boomer Bulge and Youth Base",
+    "content": "Australia's 2022 population pyramid shows a distinctive shape: a wide bulge in the 30-49 age bands (millennials and late Gen X, amplified by working-age migration), narrowing at the base (fewer children from sub-replacement fertility), and a growing top (expanding 65+ population). The 85+ cohort is 530,000, small but set to double. By 2036, the 60-74 band will expand dramatically as the 1961-1975 baby boom cohort enters late retirement. The 2036 pyramid will show a pronounced top-heaviness never before seen in Australia's demographic history. This structural shift underpins the aged care, pension, and healthcare fiscal pressures through the 2030s.",
     "year": 2022,
     "country": "Australia",
     "region": "Oceania",

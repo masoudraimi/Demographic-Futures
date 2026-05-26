@@ -1,4 +1,4 @@
-"""Pipeline tab — live RAG architecture visualiser.
+"""Pipeline tab, live RAG architecture visualiser.
 
 Shows: architecture diagram, live retrieval trace, Pydantic schema,
 and corpus stats. No LLM calls required for the trace.
@@ -11,18 +11,20 @@ import json
 import streamlit as st
 from langchain_core.documents import Document
 
+from palette import BG_CODE, GOLD, GREEN, ORANGE, TEXT_DIM, TEXT_HEADING, TEXT_MUTED, TEXT_SUBTLE
+
 
 # ---------------------------------------------------------------------------
 # Architecture diagram (Graphviz DOT)
 # ---------------------------------------------------------------------------
 
-_DOT = """
-digraph rag {
+_DOT = f"""
+digraph rag {{
     rankdir=LR;
     bgcolor="transparent";
     node [fontname="sans-serif" fontsize=11 style="filled" fillcolor="#1a1a2e"
-          fontcolor="#E8E8E8" color="#00D4FF" penwidth=1.5];
-    edge [color="#00D4FF88" fontcolor="#aaa" fontsize=10 fontname="sans-serif"];
+          fontcolor="{TEXT_HEADING}" color="{GOLD}" penwidth=1.5];
+    edge [color="{GOLD}88" fontcolor="{TEXT_SUBTLE}" fontsize=10 fontname="sans-serif"];
 
     corpus  [label="JSON Corpus\\n(100 entries)"];
     loader  [label="Loader\\nLangChain Documents"];
@@ -30,13 +32,13 @@ digraph rag {
     chroma  [label="ChromaDB\\n(persistent)\\nall-MiniLM-L6-v2" fillcolor="#0d2137"];
     bm25    [label="BM25Retriever\\n(keyword)" fillcolor="#1a2a1a"];
     ensemble[label="EnsembleRetriever\\nBM25 ×0.3  +  Vector ×0.7\\nk = 6" fillcolor="#1a1a3e"
-             color="#F39C12" penwidth=2];
+             color="{ORANGE}" penwidth=2];
     prompt  [label="ChatPromptTemplate\\n(system + question)"];
     lcel    [label="LCEL Chain\\nRunnableParallel"];
     llm     [label="LLM Gateway\\nOpenRouter\\nGemini Flash 1.5" fillcolor="#2a1a1a"];
-    pydantic[label="DemographicAnswer\\n(Pydantic v2)" color="#2ECC71" penwidth=2];
+    pydantic[label="DemographicAnswer\\n(Pydantic v2)" color="{GREEN}" penwidth=2];
     out     [label="Structured Output\\nanswer · statistics\\nconfidence · data_gap"
-             fillcolor="#0d2a0d" color="#2ECC71"];
+             fillcolor="#0d2a0d" color="{GREEN}"];
 
     corpus  -> loader  -> chunker;
     chunker -> chroma;
@@ -48,7 +50,7 @@ digraph rag {
     prompt  -> lcel;
     lcel    -> llm;
     llm     -> pydantic -> out;
-}
+}}
 """
 
 
@@ -76,9 +78,9 @@ _SCHEMA = {
 
 def _metric_card(label: str, value: str, sub: str = "") -> str:
     return f"""<div class="glass-card" style="text-align:center;padding:14px;">
-        <div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:.06em;">{label}</div>
-        <div style="font-size:1.8rem;font-weight:700;color:#00D4FF;margin:4px 0;">{value}</div>
-        <div style="font-size:0.75rem;color:#666;">{sub}</div>
+        <div style="font-size:0.72rem;color:{TEXT_MUTED};text-transform:uppercase;letter-spacing:.06em;">{label}</div>
+        <div style="font-size:1.8rem;font-weight:700;color:{GOLD};margin:4px 0;">{value}</div>
+        <div style="font-size:0.75rem;color:{TEXT_DIM};">{sub}</div>
     </div>"""
 
 
@@ -90,7 +92,7 @@ def render_pipeline_tab(retriever, docs: list[Document], chunks: list[Document])
     st.header("RAG Pipeline Architecture")
     st.caption(
         "A published hybrid retrieval system combining BM25 (keyword) and ChromaDB (dense vector) "
-        "with structured Pydantic output. Everything here is live — the retrieval trace below "
+        "with structured Pydantic output. Everything here is live, the retrieval trace below "
         "invokes the actual EnsembleRetriever."
     )
 
@@ -119,7 +121,7 @@ def render_pipeline_tab(retriever, docs: list[Document], chunks: list[Document])
     st.markdown("### Live retrieval trace")
     st.caption(
         "Type any question to invoke the EnsembleRetriever and inspect what the pipeline "
-        "actually retrieves — before the LLM sees it."
+        "actually retrieves, before the LLM sees it."
     )
 
     query = st.text_input(
@@ -158,7 +160,7 @@ def render_pipeline_tab(retriever, docs: list[Document], chunks: list[Document])
                         st.caption(f"Publication: *{pub}*")
                     st.markdown("**Chunk excerpt:**")
                     st.markdown(
-                        f'<div style="background:#141414;border-left:3px solid #00D4FF44;'
+                        f'<div style="background:{BG_CODE};border-left:3px solid {GOLD}44;'
                         f'padding:10px 14px;border-radius:0 6px 6px 0;font-size:0.85rem;'
                         f'color:#ccc;white-space:pre-wrap;">{doc.page_content[:500]}…</div>',
                         unsafe_allow_html=True,
@@ -167,7 +169,7 @@ def render_pipeline_tab(retriever, docs: list[Document], chunks: list[Document])
     st.divider()
 
     # ---- Pydantic schema ---------------------------------------------------
-    st.markdown("### Pydantic output schema — `DemographicAnswer`")
+    st.markdown("### Pydantic output schema, `DemographicAnswer`")
     st.caption(
         "When structured mode is enabled in the Chat tab, the LLM is constrained to return "
         "this exact schema via `llm.with_structured_output(DemographicAnswer)`."
@@ -179,11 +181,11 @@ def render_pipeline_tab(retriever, docs: list[Document], chunks: list[Document])
         st.markdown("**Schema definition** (`rag/pipeline.py`)")
         for field, info in _SCHEMA["fields"].items():
             st.markdown(
-                f'<div style="background:#141414;border:1px solid #333;border-radius:6px;'
+                f'<div style="background:{BG_CODE};border:1px solid #333;border-radius:6px;'
                 f'padding:8px 12px;margin-bottom:6px;">'
-                f'<span style="color:#00D4FF;font-weight:600;">{field}</span>'
-                f' <span style="color:#888;font-size:0.8rem;">{info["type"]}</span><br>'
-                f'<span style="color:#aaa;font-size:0.8rem;">{info["description"]}</span>'
+                f'<span style="color:{GOLD};font-weight:600;">{field}</span>'
+                f' <span style="color:{TEXT_MUTED};font-size:0.8rem;">{info["type"]}</span><br>'
+                f'<span style="color:{TEXT_SUBTLE};font-size:0.8rem;">{info["description"]}</span>'
                 f'</div>',
                 unsafe_allow_html=True,
             )
@@ -217,7 +219,7 @@ def render_pipeline_tab(retriever, docs: list[Document], chunks: list[Document])
     with col_b:
         st.json({
             "llm_gateway": "OpenRouter",
-            "default_model": "google/gemini-flash-1.5",
+            "default_model": "google/gemini-2.5-flash",
             "temperature": 0.2,
             "structured_output": "Pydantic v2 (DemographicAnswer)",
             "eval_framework": "RAGAS v0.2",

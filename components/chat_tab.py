@@ -1,6 +1,8 @@
 import streamlit as st
 from langchain_core.documents import Document
 
+from palette import BLUE, CONFIDENCE_COLORS, TOPIC_COLORS, TEXT_BODY_ALT
+
 _FLAGS = {
     "Australia": "🇦🇺", "Japan": "🇯🇵", "South Korea": "🇰🇷",
     "Germany": "🇩🇪", "France": "🇫🇷", "United Kingdom": "🇬🇧",
@@ -10,20 +12,12 @@ _FLAGS = {
     "China": "🇨🇳", "India": "🇮🇳",
 }
 
-_TOPIC_COLORS = {
-    "fertility": "#E91E63", "aging": "#9C27B0", "migration": "#2196F3",
-    "life_expectancy": "#4CAF50", "workforce": "#FF9800",
-    "dependency_ratio": "#F44336", "population_projection": "#00BCD4",
-    "social_cohesion": "#8BC34A", "healthcare": "#3F51B5", "pension": "#FF5722",
-}
-
-
 def _source_card(doc: Document, idx: int) -> None:
     meta = doc.metadata
     country = meta.get("country", "Unknown")
     flag = _FLAGS.get(country, "🌍")
     topic = meta.get("topic", "")
-    color = _TOPIC_COLORS.get(topic, "#777")
+    color = TOPIC_COLORS.get(topic, "#777")
     excerpt = doc.page_content[:200].replace("\n", " ") + "…"
 
     with st.expander(f"[{idx + 1}] {flag} {country} · {meta.get('year', '?')}"):
@@ -36,18 +30,15 @@ def _source_card(doc: Document, idx: int) -> None:
         st.markdown(f"> {excerpt}")
 
 
-_CONFIDENCE_COLORS = {"high": "#2ECC71", "medium": "#F39C12", "low": "#E74C3C"}
-
-
 def _structured_answer_ui(answer_obj, sources: list[Document]) -> None:
-    confidence_color = _CONFIDENCE_COLORS.get(answer_obj.confidence, "#777")
+    confidence_color = CONFIDENCE_COLORS.get(answer_obj.confidence, "#777")
     st.markdown(answer_obj.answer)
 
     if answer_obj.key_statistics:
         st.markdown("**Key statistics**")
         chips_html = " ".join(
-            f'<span style="background:rgba(74,144,226,0.15);border:1px solid #4A90E2;'
-            f'color:#e0e0e0;padding:3px 10px;border-radius:14px;font-size:0.78rem;'
+            f'<span style="background:rgba(74,144,226,0.15);border:1px solid {BLUE};'
+            f'color:{TEXT_BODY_ALT};padding:3px 10px;border-radius:14px;font-size:0.78rem;'
             f'margin:2px;display:inline-block">{s}</span>'
             for s in answer_obj.key_statistics
         )
@@ -90,7 +81,7 @@ def render_chat_tab(retriever) -> None:
     chain = st.session_state[chain_key]
 
     if structured_mode:
-        st.caption("Structured mode — answer includes statistics and confidence level.")
+        st.caption("Structured mode, answer includes statistics and confidence level.")
 
     for msg in st.session_state.messages:
         with st.chat_message(msg["role"]):

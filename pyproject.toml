@@ -1,7 +1,7 @@
 [project]
 name = "demographic-futures"
 version = "0.1.0"
-description = "RAG system for demographic intelligence — population aging, fertility, migration, and workforce trends across Australia and OECD peers"
+description = "RAG system for demographic intelligence, population aging, fertility, migration, and workforce trends across Australia and OECD peers"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
