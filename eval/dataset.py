@@ -35,7 +35,7 @@ EVAL_QUESTIONS = [
     },
     {
         "question": "What is South Korea's projected old-age dependency ratio by 2060?",
-        "ground_truth": "South Korea's old-age dependency ratio is projected to reach 97 by 2060 — nearly one retiree per worker — from 25 in 2022, representing the fastest rising trajectory in the OECD (Statistics Korea, 2023).",
+        "ground_truth": "South Korea's old-age dependency ratio is projected to reach 97 by 2060, nearly one retiree per worker, from 25 in 2022, representing the fastest rising trajectory in the OECD (Statistics Korea, 2023).",
     },
     {
         "question": "How has Germany's employment rate for older workers changed since 2000?",
@@ -55,7 +55,7 @@ EVAL_QUESTIONS = [
     },
     {
         "question": "How does Australia's social cohesion compare to Nordic countries?",
-        "ground_truth": "Australia's Scanlon Foundation social cohesion index fell from 88 in 2007 to 74 in 2022. Norway's social trust score was 74 in 2022, Finland's was 72, and Sweden's was 77 — comparable to Australia's declining score.",
+        "ground_truth": "Australia's Scanlon Foundation social cohesion index fell from 88 in 2007 to 74 in 2022. Norway's social trust score was 74 in 2022, Finland's was 72, and Sweden's was 77, comparable to Australia's declining score.",
     },
     {
         "question": "What are the main drivers of Canada's population growth?",
@@ -67,7 +67,7 @@ EVAL_QUESTIONS = [
     },
     {
         "question": "What is the UK's life expectancy trend and why has it stagnated?",
-        "ground_truth": "UK life expectancy was 80.7 years in 2022, having stagnated since 2011 — an anomaly among wealthy nations. Austerity-related cuts to social services, rising obesity, and NHS pressures are cited as drivers of this unusual stagnation (ONS, 2022).",
+        "ground_truth": "UK life expectancy was 80.7 years in 2022, having stagnated since 2011, an anomaly among wealthy nations. Austerity-related cuts to social services, rising obesity, and NHS pressures are cited as drivers of this unusual stagnation (ONS, 2022).",
     },
     {
         "question": "Which OECD countries combine very low fertility with rapid population aging?",

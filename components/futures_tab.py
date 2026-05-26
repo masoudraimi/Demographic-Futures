@@ -1,4 +1,4 @@
-"""Futures tab — scenario-planning visualisations inspired by Simon Kuestenmacher's
+"""Futures tab, scenario-planning visualisations inspired by Simon Kuestenmacher's
 PIA Congress 2026 keynote. No LLM calls: all data is baked in.
 """
 
@@ -7,6 +7,8 @@ from __future__ import annotations
 import plotly.graph_objects as go
 import streamlit as st
 from langchain_core.documents import Document
+
+from palette import BLUE, BLUE_3DB, GREEN, MIGRATION_COLORS, ORANGE, PINK, PURPLE, RED, TEXT_BODY_ALT
 
 # ---------------------------------------------------------------------------
 # Hardcoded scenario data (sourced from ABS 3222.0, AIHW, ABS 6291.0, IGR 2023)
@@ -71,7 +73,7 @@ _PYRAMID_2036 = {
 _LAYOUT = dict(
     plot_bgcolor="rgba(0,0,0,0)",
     paper_bgcolor="rgba(0,0,0,0)",
-    font=dict(color="#e0e0e0"),
+    font=dict(color=TEXT_BODY_ALT),
     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
 )
 _GRID = dict(showgrid=True, gridcolor="rgba(255,255,255,0.1)")
@@ -82,12 +84,12 @@ def _pop_scenarios_chart() -> go.Figure:
     fig = go.Figure()
 
     fig.add_trace(go.Scatter(
-        x=d["years"], y=d["series_a"], name="Series A — High",
-        mode="lines", line=dict(color="#E74C3C", width=1.5, dash="dot"),
+        x=d["years"], y=d["series_a"], name="Series A, High",
+        mode="lines", line=dict(color=RED, width=1.5, dash="dot"),
     ))
     fig.add_trace(go.Scatter(
-        x=d["years"], y=d["series_c"], name="Series C — Low",
-        fill=None, mode="lines", line=dict(color="#3498DB", width=1.5, dash="dot"),
+        x=d["years"], y=d["series_c"], name="Series C, Low",
+        fill=None, mode="lines", line=dict(color=BLUE_3DB, width=1.5, dash="dot"),
     ))
     fig.add_trace(go.Scatter(
         x=d["years"], y=d["series_a"],
@@ -95,18 +97,18 @@ def _pop_scenarios_chart() -> go.Figure:
         line=dict(width=0), showlegend=False, hoverinfo="skip",
     ))
     fig.add_trace(go.Scatter(
-        x=d["years"], y=d["series_b"], name="Series B — Base",
-        mode="lines+markers", line=dict(color="#2ECC71", width=3),
+        x=d["years"], y=d["series_b"], name="Series B, Base",
+        mode="lines+markers", line=dict(color=GREEN, width=3),
         marker=dict(size=7),
         hovertemplate="Year: %{x}<br>Population: %{y}M<extra>Series B</extra>",
     ))
 
     fig.add_annotation(x=2022, y=25.9, text="Today: 26M", showarrow=True,
-                       arrowhead=2, ax=40, ay=-30, font=dict(color="#e0e0e0", size=11))
+                       arrowhead=2, ax=40, ay=-30, font=dict(color=TEXT_BODY_ALT, size=11))
     fig.add_annotation(x=2071, y=39.9, text="~40M (base)", showarrow=False,
-                       font=dict(color="#2ECC71", size=11))
+                       font=dict(color=GREEN, size=11))
     fig.add_hline(y=56, line_dash="dash", line_color="rgba(255,255,255,0.3)",
-                  annotation_text="56M — Simon Kuestenmacher estimate",
+                  annotation_text="56M, Simon Kuestenmacher estimate",
                   annotation_position="bottom right",
                   annotation_font=dict(color="rgba(255,255,255,0.5)", size=10))
 
@@ -125,35 +127,35 @@ def _ushape_chart() -> go.Figure:
     fig = go.Figure()
 
     fig.add_trace(go.Bar(
-        x=d["years"], y=d["skill_l1_uni"], name="Skill Level 1 — University degree",
-        marker_color="#4A90E2", offsetgroup=0,
+        x=d["years"], y=d["skill_l1_uni"], name="Skill Level 1, University degree",
+        marker_color=BLUE, offsetgroup=0,
     ))
     fig.add_trace(go.Bar(
-        x=d["years"], y=d["skill_l3_tafe"], name="Skill Level 3 — TAFE / trades",
-        marker_color="#E74C3C", offsetgroup=1,
+        x=d["years"], y=d["skill_l3_tafe"], name="Skill Level 3, TAFE / trades",
+        marker_color=RED, offsetgroup=1,
     ))
     fig.add_trace(go.Scatter(
         x=d["years"], y=d["skill_l45_low"],
-        name="Skill Level 4+5 — Minimal quals",
-        mode="lines+markers", line=dict(color="#F39C12", width=2.5),
+        name="Skill Level 4+5, Minimal quals",
+        mode="lines+markers", line=dict(color=ORANGE, width=2.5),
         marker=dict(size=7), yaxis="y2",
     ))
 
     fig.add_annotation(
         x=2023, y=15, text="TAFE: 15%", showarrow=True,
-        arrowhead=2, ax=-50, ay=20, font=dict(color="#E74C3C", size=11),
+        arrowhead=2, ax=-50, ay=20, font=dict(color=RED, size=11),
     )
     fig.add_annotation(
         x=2023, y=37, text="Uni: 37%", showarrow=True,
-        arrowhead=2, ax=50, ay=-20, font=dict(color="#4A90E2", size=11),
+        arrowhead=2, ax=50, ay=-20, font=dict(color=BLUE, size=11),
     )
 
     fig.update_layout(
-        title="Australia's U-Shaped Workforce — Skill Level Distribution 1986–2036",
+        title="Australia's U-Shaped Workforce, Skill Level Distribution 1986–2036",
         xaxis_title="Year",
-        yaxis=dict(title="Share of jobs (%)", **_GRID, color="#e0e0e0"),
+        yaxis=dict(title="Share of jobs (%)", **_GRID, color=TEXT_BODY_ALT),
         yaxis2=dict(title="Skill 4+5 combined (%)", overlaying="y", side="right",
-                    showgrid=False, color="#F39C12"),
+                    showgrid=False, color=ORANGE),
         barmode="group",
         **_LAYOUT,
     )
@@ -166,19 +168,19 @@ def _aged_care_chart() -> go.Figure:
 
     fig.add_trace(go.Bar(
         x=d["years"], y=d["pop_85plus"], name="Population 85+",
-        marker_color="#9B59B6", offsetgroup=0,
+        marker_color=PURPLE, offsetgroup=0,
     ))
     fig.add_trace(go.Bar(
         x=d["years"], y=d["daily_care_need"], name="Daily care need (54% of 85+)",
-        marker_color="#E74C3C", offsetgroup=1,
+        marker_color=RED, offsetgroup=1,
     ))
     fig.add_trace(go.Bar(
         x=d["years"], y=d["care_supply"], name="Estimated care supply",
-        marker_color="#2ECC71", offsetgroup=2,
+        marker_color=GREEN, offsetgroup=2,
     ))
 
     fig.add_annotation(x=2040, y=648, text="Gap: ~290K unmet", showarrow=True,
-                       arrowhead=2, ax=-70, ay=-30, font=dict(color="#E74C3C", size=11))
+                       arrowhead=2, ax=-70, ay=-30, font=dict(color=RED, size=11))
 
     fig.update_layout(
         title="Australia: 85+ Population vs Aged Care Capacity 2020–2040",
@@ -195,8 +197,7 @@ def _migration_comp_chart() -> go.Figure:
     d = _MIGRATION_COMP
     fig = go.Figure()
 
-    colors = {"skilled": "#4A90E2", "student": "#2ECC71",
-              "family": "#F39C12", "humanitarian": "#9B59B6"}
+    colors = MIGRATION_COLORS
     labels = {"skilled": "Skilled", "student": "Student / temporary",
               "family": "Family", "humanitarian": "Humanitarian"}
 
@@ -234,18 +235,18 @@ def _pyramid_chart(year: str) -> go.Figure:
     fig = go.Figure()
     fig.add_trace(go.Bar(
         y=bands, x=males, name="Male",
-        orientation="h", marker_color="#4A90E2",
+        orientation="h", marker_color=BLUE,
         hovertemplate="<b>Male</b> %{y}<br>%{customdata:,}K<extra></extra>",
         customdata=data["male"],
     ))
     fig.add_trace(go.Bar(
         y=bands, x=females, name="Female",
-        orientation="h", marker_color="#E91E63",
+        orientation="h", marker_color=PINK,
         hovertemplate="<b>Female</b> %{y}<br>%{x:,}K<extra></extra>",
     ))
 
     fig.update_layout(
-        title=f"Australia Population Pyramid — {year}",
+        title=f"Australia Population Pyramid, {year}",
         barmode="overlay",
         xaxis=dict(
             title="Population (thousands)",
@@ -267,7 +268,7 @@ def render_futures_tab(docs: list[Document]) -> None:
     st.header("Population Futures")
     st.caption(
         "Scenario-planning visualisations drawn from ABS, AIHW, Treasury, and independent "
-        "demographic analysis. No AI generation — data is sourced directly."
+        "demographic analysis. No AI generation, data is sourced directly."
     )
 
     # ---- A: Population Scenarios ----------------------------------------
@@ -281,7 +282,7 @@ def render_futures_tab(docs: list[Document]) -> None:
     st.divider()
 
     # ---- B: U-Shape Workforce -------------------------------------------
-    st.subheader("B · The U-Shaped Society — Workforce Skill Distribution")
+    st.subheader("B · The U-Shaped Society, Workforce Skill Distribution")
     col1, col2 = st.columns([3, 1])
     with col1:
         st.plotly_chart(_ushape_chart(), use_container_width=True)
@@ -291,7 +292,7 @@ def render_futures_tab(docs: list[Document]) -> None:
             "- University-qualified jobs: **37%** and rising\n"
             "- TAFE/trades backbone: down to **15%**\n"
             "- Minimal qualification jobs: **48%** combined\n\n"
-            "The 'dumbest place in the market' is targeting the middle — it no longer exists."
+            "The 'dumbest place in the market' is targeting the middle, it no longer exists."
         )
 
     st.divider()
@@ -315,14 +316,14 @@ def render_futures_tab(docs: list[Document]) -> None:
     st.divider()
 
     # ---- D: Migration Composition ----------------------------------------
-    st.subheader("D · Migration Is Not Monolithic — Composition of NOM 2006–2023")
+    st.subheader("D · Migration Is Not Monolithic, Composition of NOM 2006–2023")
     col1, col2 = st.columns([3, 1])
     with col1:
         st.plotly_chart(_migration_comp_chart(), use_container_width=True)
     with col2:
-        st.markdown("**NOM = 518K in 2022-23 — a record.**")
+        st.markdown("**NOM = 518K in 2022-23, a record.**")
         st.markdown(
-            "- ~40% are international students — highly volatile\n"
+            "- ~40% are international students, highly volatile\n"
             "- Skilled migrants: net +$330K lifetime fiscal value\n"
             "- COVID closed the tap; post-COVID surge masks structural composition\n"
             "- 900K students in workforce data need discounting\n\n"
@@ -332,14 +333,14 @@ def render_futures_tab(docs: list[Document]) -> None:
     st.divider()
 
     # ---- E: Population Pyramid ------------------------------------------
-    st.subheader("E · Population Pyramid — The Inverting Triangle")
+    st.subheader("E · Population Pyramid, The Inverting Triangle")
     year = st.radio("Select year", ["2022", "2036"], horizontal=True)
     col1, col2 = st.columns([3, 1])
     with col1:
         st.plotly_chart(_pyramid_chart(year), use_container_width=True)
     with col2:
         if year == "2022":
-            st.markdown("**2022 — The baby boomer bulge is in the 55-70 band.**")
+            st.markdown("**2022, The baby boomer bulge is in the 55-70 band.**")
             st.markdown(
                 "- Wide base of working-age millennials\n"
                 "- 85+ cohort: 530K (small but doubling)\n"
@@ -347,7 +348,7 @@ def render_futures_tab(docs: list[Document]) -> None:
                 "Source: ABS Estimated Resident Population (Cat. 3101.0)"
             )
         else:
-            st.markdown("**2036 — The top is expanding fast.**")
+            st.markdown("**2036, The top is expanding fast.**")
             st.markdown(
                 "- 60-74 band swells dramatically\n"
                 "- 85+ cohort approaches 740K\n"

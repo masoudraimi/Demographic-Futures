@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from palette import EVAL_INDIGO, EVAL_LIGHT_BLUE, GOLD, ORANGE, RED, TEXT_BODY_ALT, TEXT_DIM, TEXT_MUTED
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -26,10 +28,10 @@ _ABLATION = {
 
 def _neon_color(score: float) -> str:
     if score >= 0.75:
-        return "#00D4FF"
+        return GOLD
     if score >= 0.50:
-        return "#F39C12"
-    return "#E74C3C"
+        return ORANGE
+    return RED
 
 
 def _metric_cards(df: pd.DataFrame) -> None:
@@ -42,11 +44,11 @@ def _metric_cards(df: pd.DataFrame) -> None:
         delta_str = f"+{delta:.2f} vs BM25 baseline" if delta >= 0 else f"{delta:.2f} vs BM25 baseline"
         col.markdown(
             f"""<div class="glass-card" style="text-align:center;padding:18px 12px;">
-                <div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">
+                <div style="font-size:0.7rem;color:{TEXT_MUTED};text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">
                     {_METRIC_LABELS[metric]}</div>
                 <div style="font-size:2.4rem;font-weight:800;color:{color};line-height:1;
                      text-shadow:0 0 14px {color}55;">{score:.2f}</div>
-                <div style="font-size:0.72rem;color:#666;margin-top:6px;">{delta_str}</div>
+                <div style="font-size:0.72rem;color:{TEXT_DIM};margin-top:6px;">{delta_str}</div>
             </div>""",
             unsafe_allow_html=True,
         )
@@ -55,7 +57,7 @@ def _metric_cards(df: pd.DataFrame) -> None:
 def _ablation_chart() -> go.Figure:
     systems = list(_ABLATION.keys())
     metrics = list(_METRIC_LABELS.values())
-    colors = ["#5C6BC0", "#42A5F5", "#00D4FF"]
+    colors = [EVAL_INDIGO, EVAL_LIGHT_BLUE, GOLD]
 
     fig = go.Figure()
     for i, system in enumerate(systems):
@@ -75,19 +77,19 @@ def _ablation_chart() -> go.Figure:
         x=3.3, y=0.80,
         text="🏆 Hybrid wins<br>on all metrics",
         showarrow=False,
-        font=dict(color="#00D4FF", size=11),
+        font=dict(color=GOLD, size=11),
         align="center",
     )
     fig.update_layout(
         barmode="group",
-        title="Retrieval strategy ablation — BM25 vs Vector vs Hybrid",
+        title="Retrieval strategy ablation, BM25 vs Vector vs Hybrid",
         yaxis=dict(range=[0, 0.95], title="Score",
                    showgrid=True, gridcolor="rgba(255,255,255,0.08)"),
         xaxis=dict(showgrid=False),
         legend=dict(orientation="h", yanchor="bottom", y=1.02),
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#e0e0e0"),
+        font=dict(color=TEXT_BODY_ALT),
     )
     return fig
 
@@ -103,17 +105,17 @@ def _heatmap_chart(df: pd.DataFrame) -> go.Figure:
         z,
         x=[_METRIC_LABELS[m] for m in available],
         y=labels,
-        color_continuous_scale=[[0, "#E74C3C"], [0.5, "#F39C12"], [1.0, "#00D4FF"]],
+        color_continuous_scale=[[0, RED], [0.5, ORANGE], [1.0, GOLD]],
         zmin=0, zmax=1,
         text_auto=".2f",
         aspect="auto",
     )
     fig.update_layout(
         title="Per-question score heatmap",
-        coloraxis_colorbar=dict(title="Score", tickfont=dict(color="#e0e0e0")),
+        coloraxis_colorbar=dict(title="Score", tickfont=dict(color=TEXT_BODY_ALT)),
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#e0e0e0"),
+        font=dict(color=TEXT_BODY_ALT),
         xaxis=dict(side="top"),
         margin=dict(l=300, r=40, t=80, b=20),
     )
@@ -161,7 +163,7 @@ def render_eval_tab() -> None:
                 try:
                     from eval.runner import run_evaluation
                     summary = run_evaluation()
-                    st.success(f"Done — Faithfulness: {summary['faithfulness']:.2f}")
+                    st.success(f"Done, Faithfulness: {summary['faithfulness']:.2f}")
                     st.rerun()
                 except Exception as e:
                     st.error(str(e))
@@ -175,7 +177,7 @@ def render_eval_tab() -> None:
     df = pd.read_json(_LATEST)
 
     # ---- Metric cards ------------------------------------------------------
-    st.markdown("### Overall scores — Hybrid (0.3 BM25 / 0.7 Vector)")
+    st.markdown("### Overall scores, Hybrid (0.3 BM25 / 0.7 Vector)")
     _metric_cards(df)
     st.markdown("<br>", unsafe_allow_html=True)
 

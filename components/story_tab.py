@@ -1,4 +1,4 @@
-"""Story tab — Simon Kuestenmacher-style 7-step demographic narrative.
+"""Story tab, Simon Kuestenmacher-style 7-step demographic narrative.
 
 Each step: one bold headline + one chart + a Simon quote + a planning implication.
 Progressive reveal on Step 2 mirrors Simon's live slide-overlay technique.
@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 import streamlit as st
+
+from palette import BLUE, GOLD, GREEN, ORANGE, PURPLE, RED, TEXT_BODY_ALT, TEXT_HEADING, TEXT_SUBTLE
 
 # ---------------------------------------------------------------------------
 # Data
@@ -55,7 +57,7 @@ _SPRAWL = {
     "types": ["3BR Weatherboard\n(shelf design)", "3BR Brick Veneer\n(shelf design)",
               "4–8 level complex\n(basement parking)", "8+ level complex\n(basement parking)"],
     "costs": [1981, 2351, 3934, 4397],
-    "colors": ["#F39C12", "#F39C12", "#E74C3C", "#E74C3C"],
+    "colors": [ORANGE, ORANGE, RED, RED],
 }
 
 # ECI rank + GDP per capita USD (OEC Atlas 2022)
@@ -77,7 +79,7 @@ _ECI = {
 _L = dict(
     plot_bgcolor="rgba(0,0,0,0)",
     paper_bgcolor="rgba(0,0,0,0)",
-    font=dict(color="#e0e0e0", size=12),
+    font=dict(color=TEXT_BODY_ALT, size=12),
 )
 _G = dict(showgrid=True, gridcolor="rgba(255,255,255,0.08)")
 
@@ -99,20 +101,20 @@ def _chart_age_distribution(show_2036: bool) -> go.Figure:
             x=_AGE_BANDS, y=_POP_2036,
             name="2036 (31.5M)",
             mode="lines+markers",
-            line=dict(color="#00D4FF", width=3),
+            line=dict(color=GOLD, width=3),
             marker=dict(size=5),
             hovertemplate="Age %{x}<br>2036: %{y}K<extra></extra>",
         ))
         fig.add_annotation(
             x="40-44", y=985, text="Millennials age into 40s →", showarrow=True,
-            arrowhead=2, ax=60, ay=-35, font=dict(color="#00D4FF", size=11),
+            arrowhead=2, ax=60, ay=-35, font=dict(color=GOLD, size=11),
         )
         fig.add_annotation(
             x="85+", y=315, text="85+ nearly doubles", showarrow=True,
-            arrowhead=2, ax=-60, ay=-30, font=dict(color="#E74C3C", size=11),
+            arrowhead=2, ax=-60, ay=-30, font=dict(color=RED, size=11),
         )
     fig.update_layout(
-        title="Australian population by age — 2026 and 2036 (Centre for Population)",
+        title="Australian population by age, 2026 and 2036 (Centre for Population)",
         xaxis_title="Age band", yaxis_title="Population (thousands)",
         legend=dict(orientation="h", y=1.05),
         **_L,
@@ -127,24 +129,24 @@ def _chart_population_scenarios() -> go.Figure:
     fig.add_trace(go.Scatter(
         x=_SCEN["years_hist"], y=_SCEN["hist"],
         name="Historical",
-        mode="lines", line=dict(color="#E8E8E8", width=2.5),
+        mode="lines", line=dict(color=TEXT_HEADING, width=2.5),
         hovertemplate="Year %{x}<br>%{y}M<extra>Historical</extra>",
     ))
     fig.add_trace(go.Scatter(
         x=_SCEN["years_proj"], y=_SCEN["low"],
         name="Low (+250K pa)", mode="lines",
-        line=dict(color="#4A90E2", width=1.5, dash="dot"),
+        line=dict(color=BLUE, width=1.5, dash="dot"),
     ))
     fig.add_trace(go.Scatter(
         x=_SCEN["years_proj"], y=_SCEN["high"],
         name="High (+500K pa)", mode="lines",
-        line=dict(color="#E74C3C", width=1.5, dash="dot"),
+        line=dict(color=RED, width=1.5, dash="dot"),
         fill="tonexty" if False else None,
     ))
     fig.add_trace(go.Scatter(
         x=_SCEN["years_proj"], y=_SCEN["med"],
         name="Medium (+350K pa)", mode="lines+markers",
-        line=dict(color="#2ECC71", width=3),
+        line=dict(color=GREEN, width=3),
         marker=dict(size=7),
     ))
     # Confidence band
@@ -158,7 +160,7 @@ def _chart_population_scenarios() -> go.Figure:
                   annotation_text="Now", annotation_position="top left",
                   annotation_font=dict(color="rgba(255,255,255,0.5)", size=10))
     fig.add_annotation(x=2116, y=58.5, text="56M\n(Simon K.)", showarrow=False,
-                       font=dict(color="#F39C12", size=10), xanchor="right")
+                       font=dict(color=ORANGE, size=10), xanchor="right")
     fig.update_layout(
         title="Will Australia double in 105, 75, or 53 years? (ABS; low/medium/high scenarios)",
         xaxis_title="Year", yaxis_title="Population (millions)",
@@ -175,34 +177,34 @@ def _chart_ushape() -> go.Figure:
     fig = go.Figure()
     fig.add_trace(go.Scatter(
         x=d["years"], y=d["uni"],
-        name="Skill 1 — University degree",
+        name="Skill 1, University degree",
         mode="lines+markers", stackgroup="one",
-        line=dict(color="#4A90E2", width=0),
+        line=dict(color=BLUE, width=0),
         fillcolor="rgba(74,144,226,0.7)",
         hovertemplate="Year %{x}<br>Uni: %{y}%<extra></extra>",
     ))
     fig.add_trace(go.Scatter(
         x=d["years"], y=d["tafe"],
-        name="Skill 3 — TAFE / trades",
+        name="Skill 3, TAFE / trades",
         mode="lines+markers", stackgroup="one",
-        line=dict(color="#E74C3C", width=0),
+        line=dict(color=RED, width=0),
         fillcolor="rgba(231,76,60,0.7)",
         hovertemplate="Year %{x}<br>TAFE: %{y}%<extra></extra>",
     ))
     fig.add_trace(go.Scatter(
         x=d["years"], y=d["low"],
-        name="Skill 4–5 — Minimal quals",
+        name="Skill 4–5, Minimal quals",
         mode="lines+markers", stackgroup="one",
-        line=dict(color="#F39C12", width=0),
+        line=dict(color=ORANGE, width=0),
         fillcolor="rgba(243,156,18,0.4)",
         hovertemplate="Year %{x}<br>Low-skill: %{y}%<extra></extra>",
     ))
     fig.add_annotation(x=2025, y=100, text="Uni: 37%", xanchor="left",
-                       showarrow=False, font=dict(color="#4A90E2", size=11))
+                       showarrow=False, font=dict(color=BLUE, size=11))
     fig.add_annotation(x=2025, y=63, text="TAFE: 15%", xanchor="left",
-                       showarrow=False, font=dict(color="#E74C3C", size=11))
+                       showarrow=False, font=dict(color=RED, size=11))
     fig.update_layout(
-        title="Australia transformed into a knowledge economy — Workforce by skill level 1986–2025",
+        title="Australia transformed into a knowledge economy, Workforce by skill level 1986–2025",
         xaxis_title="Year", yaxis_title="Share of workforce (%)",
         legend=dict(orientation="h", y=1.05),
         **_L,
@@ -216,13 +218,13 @@ def _chart_aged_care() -> go.Figure:
     d = _AGED_CARE
     fig = go.Figure()
     fig.add_trace(go.Bar(x=d["years"], y=d["pop85"], name="Population 85+",
-                         marker_color="#9B59B6", offsetgroup=0))
+                         marker_color=PURPLE, offsetgroup=0))
     fig.add_trace(go.Bar(x=d["years"], y=d["need"], name="Daily care need (54% of 85+)",
-                         marker_color="#E74C3C", offsetgroup=1))
+                         marker_color=RED, offsetgroup=1))
     fig.add_trace(go.Bar(x=d["years"], y=d["supply"], name="Estimated care supply",
-                         marker_color="#2ECC71", offsetgroup=2))
+                         marker_color=GREEN, offsetgroup=2))
     fig.add_annotation(x=2040, y=648, text="Gap: ~290K unmet", showarrow=True,
-                       arrowhead=2, ax=-70, ay=-30, font=dict(color="#E74C3C", size=11))
+                       arrowhead=2, ax=-70, ay=-30, font=dict(color=RED, size=11))
     fig.update_layout(
         title="Australia: 85+ population vs aged care capacity 2020–2040 (AIHW + ABS)",
         xaxis_title="Year", yaxis_title="People (thousands)",
@@ -241,7 +243,7 @@ def _chart_sprawl() -> go.Figure:
         marker_color=d["colors"],
         text=[f"${c:,}" for c in d["costs"]],
         textposition="outside",
-        textfont=dict(color="#E8E8E8", size=13),
+        textfont=dict(color=TEXT_HEADING, size=13),
         hovertemplate="%{x}<br><b>$%{y:,}/sqm</b><extra></extra>",
     ))
     fig.add_shape(type="line", x0=-0.5, x1=1.5, y0=2000, y1=2000,
@@ -251,7 +253,7 @@ def _chart_sprawl() -> go.Figure:
     fig.add_shape(type="line", x0=1.5, x1=3.5, y0=4000, y1=4000,
                   line=dict(color="rgba(231,76,60,0.4)", dash="dash"))
     fig.add_annotation(x=2.5, y=4150, text="Density premium", showarrow=False,
-                       font=dict(color="#E74C3C", size=10))
+                       font=dict(color=RED, size=10))
     fig.update_layout(
         title="Sprawl is cheaper to build than in-fill housing (BMT Construction Cost Table 2025)",
         xaxis_title="Housing type", yaxis_title="Cost per sqm (AUD)",
@@ -264,8 +266,8 @@ def _chart_sprawl() -> go.Figure:
 
 def _chart_eci() -> go.Figure:
     d = _ECI
-    colors = ["#E74C3C" if c == "Australia" else
-              "#F39C12" if c == "Norway" else "#4A90E2"
+    colors = [RED if c == "Australia" else
+              ORANGE if c == "Norway" else BLUE
               for c in d["countries"]]
     sizes = [18 if c in ("Australia", "Japan", "Germany", "Norway") else 10
              for c in d["countries"]]
@@ -287,8 +289,8 @@ def _chart_eci() -> go.Figure:
         x=d["rank"][aus_idx], y=d["gdp_pc"][aus_idx],
         text="Australia<br>(rank 105)", showarrow=True,
         arrowhead=2, ax=-70, ay=-40,
-        font=dict(color="#E74C3C", size=12, weight=700),
-        arrowcolor="#E74C3C",
+        font=dict(color=RED, size=12, weight=700),
+        arrowcolor=RED,
     )
     fig.add_annotation(
         x=50, y=85000,
@@ -296,7 +298,7 @@ def _chart_eci() -> go.Figure:
         showarrow=False, font=dict(color="rgba(200,184,122,0.8)", size=10, style="italic"),
     )
     fig.update_layout(
-        title="Economic Complexity Index rank vs GDP per capita — OECD peers + Australia (OEC Atlas 2022)",
+        title="Economic Complexity Index rank vs GDP per capita, OECD peers + Australia (OEC Atlas 2022)",
         xaxis=dict(title="ECI Rank (1 = most complex)", autorange="reversed", **_G),
         yaxis=dict(title="GDP per capita (USD)", **_G),
         **_L,
@@ -313,7 +315,7 @@ _STEPS = [
         "headline": "Australia operates on a very simple business model",
         "quote": "\"She'll be right\" is a grounded observation, not complacency. "
                  "Our four economic pillars remain structurally sound long-term.",
-        "planning": "Australia doesn't need to reinvent its economy — but it urgently "
+        "planning": "Australia doesn't need to reinvent its economy, but it urgently "
                     "needs to plan for the people and pressures that economy will attract.",
         "chart_fn": None,  # icon grid, handled inline
     },
@@ -331,21 +333,21 @@ _STEPS = [
         "quote": "\"The children alive today will see Australia at 56 million people. "
                  "And we are planning for this right now.\"",
         "planning": "Whether doubling takes 53 or 105 years, the direction is certain. "
-                    "Earmark the Eastern Seaboard fast-rail corridor now — you can't build it yet, "
+                    "Earmark the Eastern Seaboard fast-rail corridor now, you can't build it yet, "
                     "but the mistake is not planning for it.",
         "chart_fn": _chart_population_scenarios,
     },
     {
-        "headline": "Australia transformed into a knowledge economy — but the middle class vanished",
+        "headline": "Australia transformed into a knowledge economy, but the middle class vanished",
         "quote": "\"This is the opposite of a bell curve. This is the letter U. "
                  "The middle class is small and shrinking, ever less important.\"",
         "planning": "Planning for a bell-curve society no longer works. Rich and poor are "
                     "geographically segregating. Equitable built environments must be designed "
-                    "intentionally — they will not emerge from the market.",
+                    "intentionally, they will not emerge from the market.",
         "chart_fn": _chart_ushape,
     },
     {
-        "headline": "The aged care cliff — no chance in hell",
+        "headline": "The aged care cliff, no chance in hell",
         "quote": "\"We are doubling the 85+ cohort in 14 years. We're not importing old people. "
                  "They're already here. Will we double the aged care system? Spoiler: no chance in hell.\"",
         "planning": "Car-dependent communities accelerate mental health decline in older residents. "
@@ -364,7 +366,7 @@ _STEPS = [
         "chart_fn": _chart_sprawl,
     },
     {
-        "headline": "Australia ranks 105th in Economic Complexity — and it doesn't matter (yet)",
+        "headline": "Australia ranks 105th in Economic Complexity, and it doesn't matter (yet)",
         "quote": "\"The only reason we are rich is that we have strong institutions distributing "
                  "mining wealth equitably. Anything that weakens those institutions is absolutely dangerous.\"",
         "planning": "Economic complexity predicts long-run adaptability. Australia's rank-105 "
@@ -383,7 +385,7 @@ def _render_step_1() -> None:
     pillars = [
         ("⛏️", "Mining", "60 years of global demand remaining. Rare earths super-cycle possible."),
         ("🌾", "Agriculture", "One of the world's few food superpowers. Export value rising with climate stress."),
-        ("✈️", "Tourism", "Long-term positive — 4 billion Asian middle-class travellers emerging."),
+        ("✈️", "Tourism", "Long-term positive, 4 billion Asian middle-class travellers emerging."),
         ("🎓", "Education", "US PR problems are driving more international students to Australia."),
     ]
     cols = st.columns(4)
@@ -391,8 +393,8 @@ def _render_step_1() -> None:
         col.markdown(
             f"""<div class="glass-card" style="text-align:center;min-height:130px;">
                 <div style="font-size:2rem;">{icon}</div>
-                <div style="font-weight:700;font-size:1rem;color:#00D4FF;margin:6px 0 4px;">{title}</div>
-                <div style="font-size:0.8rem;color:#aaa;">{desc}</div>
+                <div style="font-weight:700;font-size:1rem;color:{GOLD};margin:6px 0 4px;">{title}</div>
+                <div style="font-size:0.8rem;color:{TEXT_SUBTLE};">{desc}</div>
             </div>""",
             unsafe_allow_html=True,
         )
@@ -451,7 +453,7 @@ def render_story_tab() -> None:
             unsafe_allow_html=True,
         )
         st.markdown(
-            f'<div class="planning-callout"><strong style="color:#00D4FF;">Planning implication</strong><br><br>'
+            f'<div class="planning-callout"><strong style="color:{GOLD};">Planning implication</strong><br><br>'
             f'{data["planning"]}</div>',
             unsafe_allow_html=True,
         )
@@ -480,7 +482,7 @@ def render_story_tab() -> None:
     with nav_mid:
         st.markdown(
             f'<div style="text-align:center;color:#666;font-size:0.82rem;padding-top:8px;">'
-            f'Step {step + 1} of {len(_STEPS)} — Australia at 56 Million</div>',
+            f'Step {step + 1} of {len(_STEPS)}, Australia at 56 Million</div>',
             unsafe_allow_html=True,
         )
 
@@ -492,7 +494,7 @@ def render_story_tab() -> None:
                 st.rerun()
         else:
             st.markdown(
-                '<div style="text-align:right;color:#00D4FF;font-size:0.85rem;padding-top:8px;">'
+                f'<div style="text-align:right;color:{GOLD};font-size:0.85rem;padding-top:8px;">'
                 '✓ End of story</div>',
                 unsafe_allow_html=True,
             )
