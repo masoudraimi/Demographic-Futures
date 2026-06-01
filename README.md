@@ -15,6 +15,9 @@
 For a live demo, click here:
 
 > **[Open the live app →](https://australian-demographic-futures.streamlit.app/)**
+
+<video src="assets/screen_recording.webm" controls width="100%"></video>
+
 ---
 
 ## What it does
