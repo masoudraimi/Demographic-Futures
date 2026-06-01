@@ -18,7 +18,7 @@ For a live demo, click here:
 
 ![Demo](assets/screen_recording.gif)
 
----
+
 
 ## What it does
 
@@ -33,7 +33,20 @@ Additional tools are available in collapsible appendices at the bottom of the pa
 - **Country Trend Explorer**: plot any demographic indicator across OECD peers over time
 - **Pipeline and Evaluation**: live retrieval trace and RAGAS benchmark results
 
----
+
+
+## Retrieval quality
+
+Hybrid retrieval (BM25 + vector) outperforms either method alone across all four RAGAS metrics. Evaluated on 20 curated Q&A pairs covering factual retrieval, cross-country comparison, trend questions, multi-hop synthesis, and negative cases.
+
+| Metric | BM25 only | Vector only | **Hybrid (0.3 / 0.7)** |
+|---|:---:|:---:|:---:|
+| Faithfulness | 0.70 | 0.73 | **0.78** |
+| Answer Relevancy | 0.67 | 0.72 | **0.76** |
+| Context Precision | 0.64 | 0.69 | **0.74** |
+| Context Recall | 0.71 | 0.68 | **0.76** |
+
+
 
 ## Dashboard sections
 
@@ -47,25 +60,54 @@ Additional tools are available in collapsible appendices at the bottom of the pa
 | Housing and Urban Form | Construction cost per sqm by dwelling type |
 | Economic Complexity | ECI rank 89 out of 166 countries (OEC HS92 2024) |
 
----
+
 
 ## Architecture
 
 ```mermaid
-flowchart TD
-    A[sample_corpus.json\n134 demographic entries\n10 topics x 19 countries] --> B[rag/loader.py\nJSON to LangChain Documents\ncountry, org, topic, metric_years, metric_values]
-    B --> C[rag/chunker.py\nRecursiveCharacterTextSplitter\nchunk_size=512 overlap=64]
-    C --> D1[ChromaDB\nall-MiniLM-L6-v2 embeddings]
-    C --> D2[BM25Retriever\npersisted to disk]
-    D1 --> E[EnsembleRetriever\nBM25 0.3 + Vector 0.7]
+flowchart LR
+    subgraph SRC ["① Corpus"]
+        A[(sample_corpus.json\n134 entries\n10 topics · 19 countries)]
+    end
+
+    subgraph ING ["② Ingestion"]
+        B[loader.py\nJSON → LangChain Documents\nwith demographic metadata]
+    end
+
+    subgraph CHK ["③ Chunking"]
+        C[chunker.py\nRecursiveCharacterTextSplitter\nchunk_size=512 · overlap=64]
+    end
+
+    subgraph IDX ["④ Index"]
+        D1[(ChromaDB\nall-MiniLM-L6-v2\ndisk-persisted)]
+        D2[(BM25Retriever\ndisk-persisted)]
+    end
+
+    subgraph RET ["⑤ Retrieval"]
+        E[EnsembleRetriever\n0.3 × BM25 + 0.7 × vector]
+    end
+
+    subgraph GEN ["⑥ Generation"]
+        F[LCEL chain\ndemographic system prompt]
+        G[Gemini Flash 1.5\nvia OpenRouter]
+        F --> G
+    end
+
+    subgraph UI ["⑦ Streamlit"]
+        H[Chat sidebar\n7 story sections\nappendices]
+    end
+
+    A --> B --> C
+    C --> D1
+    C --> D2
+    D1 --> E
     D2 --> E
-    E --> F[LCEL chain\ndemographic system prompt]
-    F --> G[Streamlit dashboard\nChat + 7 story sections + appendices]
-    B --> H[timeline_tab.py\nDirect metadata read\nno LLM call]
-    H --> G
+    E --> F
+    G --> H
+    B -.->|direct metadata · no LLM| H
 ```
 
----
+
 
 ## Technologies used
 
@@ -105,7 +147,7 @@ uv is a fast Python package manager written in Rust. It replaces pip and venv fo
 ### pytest
 pytest runs the automated test suite for the loader, chunker, retriever, and pipeline modules. It was needed to catch regressions when the corpus schema or retrieval logic changes.
 
----
+
 
 ## Data sources
 
@@ -123,20 +165,7 @@ pytest runs the automated test suite for the loader, chunker, retriever, and pip
 
 OEC HS92 data covers 2000 to 2024 across 25 annual CSV files. Australia's ECI score was +0.31 in 2000, crossed into negative territory around 2005-06 during the commodities boom, and reached -0.61 at rank 89 out of 166 countries in 2024.
 
----
 
-## Evaluation results
-
-| Metric | BM25 only | Vector only | Hybrid (0.3/0.7) |
-|---|---|---|---|
-| Faithfulness | 0.70 | 0.73 | **0.78** |
-| Answer Relevancy | 0.67 | 0.72 | **0.76** |
-| Context Precision | 0.64 | 0.69 | **0.74** |
-| Context Recall | 0.71 | 0.68 | **0.76** |
-
-Hybrid retrieval wins on all four metrics. The evaluation dataset contains 20 curated Q&A pairs covering factual retrieval, cross-country comparison, trend questions, multi-hop synthesis, and negative cases.
-
----
 
 ## Quick start
 
@@ -163,7 +192,7 @@ Or with Docker:
 docker compose up
 ```
 
----
+
 
 ## Design decisions
 
@@ -185,7 +214,7 @@ Free, no API key for indexing, ~80ms/doc on CPU, and achieves ~84% of OpenAI tex
 **Why HS92 for ECI data?**
 HS92 is the revision used in Hidalgo and Hausmann's original Economic Complexity methodology. It provides the longest consistent time series (from 1995) and is the standard the OEC uses for historical ECI rankings and comparisons.
 
----
+
 
 ## Project structure
 
